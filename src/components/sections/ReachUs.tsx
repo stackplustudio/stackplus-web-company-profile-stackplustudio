@@ -91,7 +91,7 @@ export default function ReachUs() {
                 type="text" 
                 name="name"
                 required
-                placeholder="Ojan" 
+                placeholder="Your Name" 
                 className="w-full bg-[#F6F3EC] border border-transparent focus:border-[#0053f1] focus:bg-white focus:outline-none rounded-xl px-4 py-3.5 text-sm text-gray-700 transition-colors"
               />
             </div>
@@ -102,7 +102,7 @@ export default function ReachUs() {
                 type="email" 
                 name="email"
                 required
-                placeholder="ojan@gmail.com" 
+                placeholder="your.email@gmail.com" 
                 className="w-full bg-[#F6F3EC] border border-transparent focus:border-[#0053f1] focus:bg-white focus:outline-none rounded-xl px-4 py-3.5 text-sm text-gray-700 transition-colors"
               />
             </div>
