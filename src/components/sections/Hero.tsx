@@ -9,7 +9,7 @@ export default function Hero() {
         {/* Kiri: Teks & Input */}
         <div className="max-w-xl z-10">
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
             <p className="text-sm font-medium text-gray-500">Trusted by founders</p>
           </div>
           
@@ -39,21 +39,30 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Kanan: Mockup Area */}
+        {/* Kanan: Mockup Area (Estetik Logo) */}
         <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square flex items-center justify-center">
-          {/* Latar belakang kotak-kotak (grid) samar */}
-          <div className="absolute right-0 top-0 w-3/4 h-3/4 bg-[#F2EFE9] rounded-3xl opacity-50 bg-[radial-gradient(#d1d5db_2px,transparent_2px)] [background-size:20px_20px]"></div>
           
-          {/* Area Foto Tim Bekerja */}
-          <div className="relative z-10 w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-100 aspect-[3/4] overflow-hidden">
+          {/* Latar belakang grid & gradient glow */}
+          <div className="absolute right-0 top-0 w-3/4 h-3/4 bg-[#F2EFE9] rounded-full opacity-40 blur-3xl"></div>
+          <div className="absolute left-10 bottom-10 w-64 h-64 bg-[#0053f1] opacity-10 rounded-full blur-3xl animate-pulse"></div>
+          
+          {/* Container Logo dengan animasi melayang (bounce) halus */}
+          <div className="relative z-10 flex items-center justify-center animate-[bounce_4s_ease-in-out_infinite]">
+             
+             {/* Efek cahaya biru pekat tepat di belakang logo */}
+             <div className="absolute inset-0 bg-[#0053f1] opacity-20 blur-2xl rounded-full"></div>
+
+             {/* GANTI PATH INI DENGAN ICON STACKPLUS KAMU (Contoh: /icons/logo-icon.png) */}
              <Image 
-               src="/images/arief.jpeg" 
-               alt="Tim StackPlus Bekerja" 
-               fill 
-               className="object-cover" 
+               src="/icons/logo4.png" // <-- Ubah nama file ini ke icon khusus kamu
+               alt="StackPlus Aesthetic Logo" 
+               width={250} 
+               height={250}
+               className="object-contain drop-shadow-2xl relative z-10" 
                priority 
              />
           </div>
+
         </div>
         
       </div>
