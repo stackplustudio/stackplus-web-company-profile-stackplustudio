@@ -28,7 +28,7 @@ export default function ValueSection() {
         
         {/* Latar Belakang Gambar */}
         <Image 
-          src="/images/zauzan.png" // Pastikan nama file ini sesuai dengan yang ada di foldermu
+          src="/images/areakerja_landscape1.jpeg" // Pastikan nama file ini sesuai dengan yang ada di foldermu
           alt="Tim Meeting StackPlus" 
           fill 
           className="object-cover" 

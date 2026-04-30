@@ -69,7 +69,7 @@ export default function VisionMission() {
         {/* Kolom Kanan: Gambar */}
         <div className="w-full h-full min-h-[500px] bg-gray-200 rounded-3xl relative overflow-hidden shadow-lg lg:mt-8">
            <Image 
-             src="/images/raisa.png" // Pastikan nama file ini sesuai dengan yang ada di folder public/images kamu
+             src="/images/area_diskusi3.jpeg" // Pastikan nama file ini sesuai dengan yang ada di folder public/images kamu
              alt="Tim layanan pelanggan StackPlus siap membantu"
              fill
              className="object-cover"

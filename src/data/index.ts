@@ -82,32 +82,44 @@ export const teamData = [
   { 
     name: "Zauzan Adzani", 
     role: "UI/UX DESIGNER", 
-    image: "/images/zauzan.png" // Hapus kata src, wajib pakai / di awal
+    image: "/images/zauzan.png", // <-- Koma ini yang tadi hilang
+    instagram: "https://www.instagram.com/zauzandz_/", 
+    linkedin: "https://www.linkedin.com/in/zauzandz/"   
   },
   { 
     name: "Valent Destra", 
     role: "UI/UX DESIGNER", 
-    image: "/images/valen.png" // Disesuaikan dengan nama file di VS Code
+    image: "/images/valen.png",
+    instagram: "https://www.instagram.com/vldpsh_/",
+    linkedin: "https://www.linkedin.com/in/valentdestra/?locale=in"
   },
   { 
     name: "Budi Cahyono", 
     role: "DEVELOPER", 
-    image: "/images/budi.png" // Disesuaikan dengan nama file di VS Code
+    image: "/images/budi.png",
+    instagram: "https://www.instagram.com/budii.cahyonoo/", 
+    linkedin: "https://www.linkedin.com/in/budi-cahyono-976491246/"
   },
   { 
     name: "Raisha Nayyara", 
     role: "PRODUCT DEVELOPMENT", 
-    image: "/images/raisa.png" // Disesuaikan dengan nama file di VS Code
+    image: "/images/raisa.png",
+    instagram: "https://www.instagram.com/raishanayyaraa/",
+    linkedin: "https://www.linkedin.com/in/raisha-nayyara/"
   },
   { 
     name: "Rafael Kristanto", 
     role: "PRODUCT DEVELOPMENT", 
-    image: "/images/rafael.jpeg" // Disesuaikan dengan nama file di VS Code
+    image: "/images/rafael.jpeg",
+    instagram: "https://www.instagram.com/rafaelaktbn/",
+    linkedin: "https://linkedin.com/in/rafael"
   },
   { 
     name: "Arief Rachman", 
     role: "SOCIAL MEDIA SPESIALIST", 
-    image: "/images/arief.jpeg" // Disesuaikan dengan nama file di VS Code
+    image: "/images/arief.jpeg",
+    instagram: "https://www.instagram.com/ariefrachh/",
+    linkedin: " https://www.linkedin.com/in/arief-rachman25/"
   },
 ];
 // --- DATA KATEGORI & DETAIL PORTFOLIO ---
@@ -420,7 +432,7 @@ export const brandingLifecycleData = [
 ];
 // --- DATA WHY US ---
 export const whyUsData = {
-  imageOne: "/images/valen.png", // Ganti dengan nama file Foto Switch/Mixer kamu
-  imageTwo: "/images/budi.png",  // Ganti dengan nama file Foto Tim Bekerja kamu
+  imageOne: "/images/area_diskusi1.jpeg", // Ganti dengan nama file Foto Switch/Mixer kamu
+  imageTwo: "/images/area_diskusi2.jpeg",  // Ganti dengan nama file Foto Tim Bekerja kamu
   // ... data lainnya seperti title atau desc jika ada
 };
