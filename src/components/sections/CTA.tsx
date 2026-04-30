@@ -25,19 +25,36 @@ export default function CTA() {
         {/* Konten Kanan (Form Input) */}
         <div className="relative z-10 w-full max-w-md lg:w-auto flex-shrink-0">
           <p className="text-white mb-4 font-medium text-center lg:text-left">Stay up to date</p>
-          <div className="flex flex-col sm:flex-row items-center bg-white rounded-full p-2 w-full shadow-lg">
+          
+          {/* FormSubmit Logic diimplementasikan di sini */}
+          <form 
+            action="https://formsubmit.co/stackplustudio@gmail.com" 
+            method="POST" 
+            className="flex flex-col sm:flex-row items-center bg-white rounded-full p-2 w-full shadow-lg"
+          >
             <div className="pl-4 pr-2 text-gray-400 hidden sm:block">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             </div>
+            
             <input 
               type="email" 
+              name="email"
+              required
               placeholder="Enter your email here!" 
               className="flex-1 bg-transparent border-none focus:outline-none text-sm px-4 sm:px-2 py-3 sm:py-0 text-gray-700 w-full text-center sm:text-left"
             />
-            <button className="bg-[#0053f1] text-white px-8 py-3.5 rounded-full text-xs font-bold hover:bg-[#003cb3] transition-all whitespace-nowrap w-full sm:w-auto">
+            
+            {/* Konfigurasi Tambahan FormSubmit (Hidden) */}
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_subject" value="[Lead Baru] Email dari CTA Website StackPlus!" />
+            
+            <button 
+              type="submit" 
+              className="bg-[#0053f1] text-white px-8 py-3.5 rounded-full text-xs font-bold hover:bg-[#003cb3] transition-all whitespace-nowrap w-full sm:w-auto"
+            >
               CONTACT US
             </button>
-          </div>
+          </form>
         </div>
 
       </div>

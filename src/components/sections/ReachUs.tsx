@@ -79,11 +79,18 @@ export default function ReachUs() {
             </h3>
           </div>
 
-          <form className="space-y-6">
+          {/* Form yang sudah diintegrasikan dengan FormSubmit */}
+          <form action="https://formsubmit.co/stackplustudio@gmail.com" method="POST" className="space-y-6">
+            
+            {/* Konfigurasi Tambahan FormSubmit (Hidden) */}
+            <input type="hidden" name="_captcha" value="false" />
+            
             <div>
               <label className="block text-sm font-medium text-gray-900 mb-2">Full Name</label>
               <input 
                 type="text" 
+                name="name"
+                required
                 placeholder="Ojan" 
                 className="w-full bg-[#F6F3EC] border border-transparent focus:border-[#0053f1] focus:bg-white focus:outline-none rounded-xl px-4 py-3.5 text-sm text-gray-700 transition-colors"
               />
@@ -93,6 +100,8 @@ export default function ReachUs() {
               <label className="block text-sm font-medium text-gray-900 mb-2">Email Address</label>
               <input 
                 type="email" 
+                name="email"
+                required
                 placeholder="ojan@gmail.com" 
                 className="w-full bg-[#F6F3EC] border border-transparent focus:border-[#0053f1] focus:bg-white focus:outline-none rounded-xl px-4 py-3.5 text-sm text-gray-700 transition-colors"
               />
@@ -102,6 +111,8 @@ export default function ReachUs() {
               <label className="block text-sm font-medium text-gray-900 mb-2">Subject Of Interest</label>
               <input 
                 type="text" 
+                name="subject"
+                required
                 placeholder="Regarding Product" 
                 className="w-full bg-[#F6F3EC] border border-transparent focus:border-[#0053f1] focus:bg-white focus:outline-none rounded-xl px-4 py-3.5 text-sm text-gray-700 transition-colors"
               />
@@ -110,6 +121,8 @@ export default function ReachUs() {
             <div>
               <label className="block text-sm font-medium text-gray-900 mb-2">How may we assist you?</label>
               <textarea 
+                name="message"
+                required
                 rows={4}
                 placeholder="Give us more info.." 
                 className="w-full bg-[#F6F3EC] border border-transparent focus:border-[#0053f1] focus:bg-white focus:outline-none rounded-xl px-4 py-3.5 text-sm text-gray-700 transition-colors resize-none"
@@ -117,7 +130,7 @@ export default function ReachUs() {
             </div>
 
             <button 
-              type="button" 
+              type="submit" 
               className="w-full bg-[#0053f1] text-white py-4 rounded-xl font-bold hover:bg-[#003cb3] transition-colors shadow-lg shadow-primary/20 mt-4"
             >
               Send Your Message
