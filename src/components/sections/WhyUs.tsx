@@ -87,13 +87,29 @@ export default function WhyUs() {
         </div>
 
         {/* Box 4: Business-Focused UX */}
+        {/* Box 4: Business-Focused UX */}
         <div className="lg:col-span-7 bg-[#FDFBF7] rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
           <h3 className="text-xl font-bold text-gray-900 mb-2">Business-Focused UX</h3>
           <p className="text-sm text-gray-500 mb-12">Clear flows built to drive conversion and growth.</p>
-          <div className="flex flex-wrap justify-center items-end gap-6 md:gap-12 w-full">
-            <div className="flex flex-col items-center"><div className="w-24 h-24 rounded-full border-2 border-primary flex items-center justify-center mb-4 bg-primary/5"><span className="text-lg font-bold text-gray-900">98%</span></div><span className="text-xs text-gray-400">Lead Generation</span></div>
-            <div className="flex flex-col items-center"><div className="w-32 h-32 rounded-full border-[3px] border-primary flex items-center justify-center mb-4 bg-primary/5 shadow-[0_0_20px_rgba(59,0,255,0.1)]"><span className="text-3xl font-bold text-gray-900">100%</span></div><span className="text-xs text-gray-400">Business impact</span></div>
-            <div className="flex flex-col items-center"><div className="w-24 h-24 rounded-full border-2 border-primary flex items-center justify-center mb-4 bg-primary/5"><span className="text-lg font-bold text-gray-900">98%</span></div><span className="text-xs text-gray-400">Conversion</span></div>
+          <div className="flex flex-row justify-center items-end gap-4 md:gap-12 w-full">
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full border-2 border-primary flex items-center justify-center mb-4 bg-primary/5">
+                <span className="text-base sm:text-lg font-bold text-gray-900">98%</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-400 text-center">Lead Generation</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-[3px] border-primary flex items-center justify-center mb-4 bg-primary/5 shadow-[0_0_20px_rgba(59,0,255,0.1)]">
+                <span className="text-2xl sm:text-3xl font-bold text-gray-900">100%</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-400 text-center">Business impact</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full border-2 border-primary flex items-center justify-center mb-4 bg-primary/5">
+                <span className="text-base sm:text-lg font-bold text-gray-900">98%</span>
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-400 text-center">Conversion</span>
+            </div>
           </div>
         </div>
 
