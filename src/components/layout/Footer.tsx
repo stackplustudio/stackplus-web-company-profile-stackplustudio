@@ -19,10 +19,10 @@ export default function Footer() {
         <div className="col-span-1">
           <Link href="/" className="inline-block mb-6">
             <Image 
-              src="/icons/logo3 - Copy.png" 
+              src="/icons/logonavbarbackgorund_biru.png" 
               alt="StackPlus Studio Logo" 
-              width={70} 
-              height={40} 
+              width={300} 
+              height={90} 
               className="w-auto h-8 md:h-10 object-contain" 
             />
           </Link>

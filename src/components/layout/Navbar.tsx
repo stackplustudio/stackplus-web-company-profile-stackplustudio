@@ -60,7 +60,7 @@ export default function Navbar() {
                 priority
               />
               <Image 
-                src="/icons/Logo Text 1 PNG.png" 
+                src="/icons/navbarnobackground_putih.png" 
                 alt="StackPlus Studio Logo White" 
                 fill
                 className={cn(
