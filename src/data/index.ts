@@ -31,26 +31,31 @@ export const expertiseData = [
     title: "UI/UX Design",
     desc: "Crafting intuitive and aesthetically pleasing digital experiences that engage users.",
     isActive: true, // Card pertama warnanya biru
+    href: "/service#uiux"
   },
   {
     title: "Web Development",
     desc: "Building scalable, high-performance web applications using cutting-edge technologies.",
     isActive: false,
+    href: "/service#webdev"
   },
   {
     title: "Mobile Development",
     desc: "Developing cross-platform mobile apps that provide a seamless user experience.",
     isActive: false,
+    href: "/service#mobiledev"
   },
   {
     title: "AI ChatBot",
     desc: "Building scalable, high-performance web applications using cutting-edge technologies.",
     isActive: false,
+    href: "/service#chatbot"
   },
   {
     title: "Branding Design",
     desc: "Developing cross-platform mobile apps that provide a seamless user experience.",
     isActive: false,
+    href: "/service#branding"
   },
 ];
 

@@ -1,7 +1,19 @@
 import { expertiseData } from "@/data";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Layout, Code, Smartphone, Bot, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// Fungsi pintar untuk memilih ikon berdasarkan judul layanan
+const getIcon = (title: string) => {
+  switch (title) {
+    case "UI/UX Design": return <Layout size={24} />;
+    case "Web Development": return <Code size={24} />;
+    case "Mobile Development": return <Smartphone size={24} />;
+    case "AI ChatBot": return <Bot size={24} />;
+    case "Branding Design": return <Palette size={24} />;
+    default: return <Layout size={24} />;
+  }
+};
 
 export default function Expertise() {
   return (
@@ -41,12 +53,12 @@ export default function Expertise() {
                 : "bg-[#F8F6F0] text-gray-900 hover:bg-[#F0EBE0]"
             )}
           >
-            {/* Icon Placeholder (Lingkaran) */}
+            {/* Ikon Dinamis yang sudah diganti */}
             <div className={cn(
               "w-12 h-12 rounded-full flex items-center justify-center mb-6",
               item.isActive ? "bg-white/20 text-white" : "bg-primary/10 text-primary"
             )}>
-              <div className="w-5 h-5 border-2 rounded-sm border-current border-dashed"></div>
+              {getIcon(item.title)}
             </div>
 
             <div>
@@ -57,8 +69,16 @@ export default function Expertise() {
               )}>
                 {item.desc}
               </p>
+              
               <Link 
-                href="#" 
+                href={
+                  item.title === "Web Development" ? "/service/web-development" : 
+                  item.title === "UI/UX Design" ? "/service/ui-ux-design" : 
+                  item.title === "Mobile Development" ? "/service/mobile-development" : 
+                  item.title === "AI ChatBot" ? "/service/ai-chatbot" : 
+                  item.title === "Branding Design" ? "/service/branding-design" : 
+                  "#"
+                } 
                 className={cn(
                   "inline-flex items-center text-sm font-bold gap-2 group",
                   item.isActive ? "text-white" : "text-primary"

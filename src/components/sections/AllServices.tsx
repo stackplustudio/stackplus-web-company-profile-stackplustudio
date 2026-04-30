@@ -1,6 +1,19 @@
 import { expertiseData } from "@/data";
 import Link from "next/link";
+import { Layout, Code, Smartphone, Bot, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// Fungsi pintar untuk memilih ikon berdasarkan judul layanan
+const getIcon = (title: string) => {
+  switch (title) {
+    case "UI/UX Design": return <Layout size={24} />;
+    case "Web Development": return <Code size={24} />;
+    case "Mobile Development": return <Smartphone size={24} />;
+    case "AI ChatBot": return <Bot size={24} />;
+    case "Branding Design": return <Palette size={24} />;
+    default: return <Layout size={24} />;
+  }
+};
 
 export default function AllServices() {
   return (
@@ -17,7 +30,7 @@ export default function AllServices() {
         </h1>
       </div>
 
-      {/* Grid Cards (Sama seperti di Home) */}
+      {/* Grid Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {expertiseData.map((item, index) => (
           <div 
@@ -29,12 +42,12 @@ export default function AllServices() {
                 : "bg-[#FDFBF7] border border-[#EAE5D9] text-gray-900 hover:shadow-md"
             )}
           >
-            {/* Icon Placeholder */}
+            {/* Ikon Dinamis yang sudah diganti */}
             <div className={cn(
               "w-12 h-12 rounded-full flex items-center justify-center mb-6",
               item.isActive ? "bg-white/20 text-white" : "bg-primary/10 text-primary"
             )}>
-              <div className="w-5 h-5 border-2 rounded-sm border-current border-dashed"></div>
+              {getIcon(item.title)}
             </div>
 
             <div>
@@ -46,7 +59,6 @@ export default function AllServices() {
                 {item.desc}
               </p>
               
-              {/* BAGIAN YANG DIKOREKSI: Hilangkan tanda kutip di luar kurung kurawal */}
               <Link 
                 href={
                   item.title === "Web Development" ? "/service/web-development" : 
@@ -62,7 +74,6 @@ export default function AllServices() {
                 )}
               >
                 Learn More 
-                {/* Custom SVG Arrow agar tidak error library */}
                 <svg className="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
