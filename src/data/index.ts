@@ -11,17 +11,17 @@ export const navLinks = [
 export const footerLinks = {
   quickLinks: [
     { name: "Home", href: "/" },
-    { name: "About", href: "#about" },
-    { name: "Portfolio", href: "#portofolio" },
-    { name: "Blog", href: "#blog" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/about" },
+    { name: "Service", href: "/service" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Contact", href: "/contact" },
   ],
   services: [
-    { name: "UI/UX Design", href: "#" },
-    { name: "Logo & Branding", href: "#" },
-    { name: "Web Development", href: "#" },
-    { name: "Mobile Development", href: "#" },
-    { name: "AI Chatbot", href: "#" },
+    { name: "UI/UX Design", href: "/service#uiux" },
+    { name: "Logo & Branding", href: "/service#branding" },
+    { name: "Web Development", href: "/service#webdev" },
+    { name: "Mobile Development", href: "/service#mobiledev" },
+    { name: "AI Chatbot", href: "/service#chatbot" },
   ],
 };
 

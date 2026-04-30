@@ -48,9 +48,9 @@ export default function Navbar() {
       <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 transition-all duration-500">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <Link href="/" className="relative w-[80px] h-[40px] block">
+            <Link href="/" className="relative w-[150px] h-[45px] block">
               <Image 
-                src="/icons/logo3 - Copy.png" 
+                src="/icons/logonavbarbackgorund_biru.png" 
                 alt="StackPlus Studio Logo" 
                 fill
                 className={cn(
@@ -60,7 +60,7 @@ export default function Navbar() {
                 priority
               />
               <Image 
-                src="/icons/logo-white.png" 
+                src="/icons/Logo Text 1 PNG.png" 
                 alt="StackPlus Studio Logo White" 
                 fill
                 className={cn(

@@ -65,7 +65,12 @@ export default function Footer() {
           <div className="flex gap-3">
             
             {/* Custom SVG untuk Instagram */}
-            <Link href="#" className="w-10 h-10 bg-[#0053f1] rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity">
+            <Link 
+              href="https://www.instagram.com/stackplus.studio/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-[#0053f1] rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -74,7 +79,12 @@ export default function Footer() {
             </Link>
 
             {/* Custom SVG untuk LinkedIn */}
-            <Link href="#" className="w-10 h-10 bg-[#0053f1] rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity">
+            <Link 
+              href="https://www.linkedin.com/in/stackplus-studio-9440873a6/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-[#0053f1] rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                 <rect x="2" y="9" width="4" height="12"></rect>
@@ -83,7 +93,12 @@ export default function Footer() {
             </Link>
             
             {/* Custom SVG untuk TikTok */}
-            <Link href="#" className="w-10 h-10 bg-[#0053F1] rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity">
+            <Link 
+              href="https://www.tiktok.com/@stackplustudio826?_r=1&_t=ZS-95xyaQqXIW7" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-[#0053F1] rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 15.68a6.34 6.34 0 0 0 6.27 6.28A6.35 6.35 0 0 0 17.5 15.63V8.81a8.3 8.3 0 0 0 4.19 1.25V6.62a4.8 4.8 0 0 1-2.1-.68z"/>
               </svg>
@@ -100,8 +115,9 @@ export default function Footer() {
           © 2026 StackPlus. All rights reserved.
         </p>
         <div className="flex gap-6 text-sm text-gray-400">
-          <Link href="#" className="hover:text-primary">Privacy Policy</Link>
-          <Link href="#" className="hover:text-primary">Terms of Service</Link>
+          {/* Ganti dengan link halaman Privacy & Terms asli kamu jika sudah ada */}
+          <Link href="/privacy" className="hover:text-primary">Privacy Policy</Link>
+          <Link href="/terms" className="hover:text-primary">Terms of Service</Link>
         </div>
       </div>
     </footer>
