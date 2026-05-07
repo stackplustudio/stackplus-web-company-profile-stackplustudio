@@ -56,7 +56,7 @@ export default function Hero() {
 
              {/* PERBAIKAN: Size logo di HP diperkecil (w-[140px]), di Desktop normal */}
              <Image 
-               src="/icons/logo3 - Copy.png" 
+               src="/icons/Primary Logo 2 PNG.png" 
                alt="StackPlus Aesthetic Logo" 
                width={250} 
                height={250}
