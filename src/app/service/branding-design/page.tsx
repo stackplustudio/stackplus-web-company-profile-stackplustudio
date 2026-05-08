@@ -7,6 +7,19 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import CTA from "@/components/sections/CTA";
 import { supabase } from "@/lib/supabase"; // Import Supabase
+import { ArrowRight, Layout, Code, Smartphone, Bot, Palette } from "lucide-react";
+
+// --- TAMBAHAN BARU: Fungsi untuk memilih ikon berdasarkan judul ---
+const getIcon = (title: string) => {
+  switch (title) {
+    case "UI/UX Design": return <Layout size={24} />;
+    case "Web Development": return <Code size={24} />;
+    case "Mobile Development": return <Smartphone size={24} />;
+    case "AI ChatBot": return <Bot size={24} />;
+    case "Branding Design": return <Palette size={24} />;
+    default: return <Layout size={24} />;
+  }
+};
 
 export default function BrandingPricingPage() {
   const [activeTab, setActiveTab] = useState("LOGO");
@@ -137,20 +150,22 @@ export default function BrandingPricingPage() {
       </section>
 
       {/* SECTION 2: EXPLORE OTHER SERVICES */}
-      {/* SECTION 2: EXPLORE OTHER SERVICES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="w-full h-px bg-gray-200 mb-16"></div>
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10">Explore Other Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {otherServices.map((item, index) => (
             <div key={index} className="bg-[#FDFBF7] border border-[#EAE5D9] p-8 rounded-2xl flex flex-col justify-between h-[280px] hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              
+              {/* --- BAGIAN INI SUDAH DIGANTI MENGGUNAKAN GETICON --- */}
               <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-primary/10 text-primary">
-                <div className="w-5 h-5 border-2 rounded-sm border-current border-dashed"></div>
+                {getIcon(item.title)}
               </div>
+              
               <div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900">{item.title}</h3>
                 <p className="text-sm mb-6 line-clamp-2 text-gray-500">{item.desc}</p>
-                {/* 👇 Logika href dimasukkan di sini, class desain tidak diubah sama sekali 👇 */}
+                {/* Logika href dimasukkan di sini */}
                 <Link 
                   href={
                     item.title === "Web Development" ? "/service/web-development" : 
@@ -163,7 +178,8 @@ export default function BrandingPricingPage() {
                   className="inline-flex items-center text-sm font-bold gap-2 group text-primary"
                 >
                   Learn More 
-                  <svg className="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  {/* --- BAGIAN INI DIGANTI MENGGUNAKAN ARROWRIGHT --- */}
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
