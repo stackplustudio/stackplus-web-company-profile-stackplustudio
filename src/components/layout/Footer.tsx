@@ -49,13 +49,28 @@ export default function Footer() {
         <div>
           <h4 className="text-primary font-bold text-sm mb-6">Services</h4>
           <ul className="space-y-4">
-            {footerLinks.services.map((link) => (
-              <li key={link.name}>
-                <Link href={link.href} className="text-gray-500 text-sm hover:text-primary transition-colors">
-                  {link.name}
-                </Link>
-              </li>
-            ))}
+            {footerLinks.services.map((link) => {
+              // Membuat pengecekan lebih fleksibel (tidak peka huruf besar/kecil)
+              const name = link.name.toLowerCase();
+              let targetHref = link.href;
+
+              if (name.includes("web dev")) targetHref = "/service/web-development";
+              else if (name.includes("ui/ux")) targetHref = "/service/ui-ux-design";
+              else if (name.includes("mobile")) targetHref = "/service/mobile-development";
+              else if (name.includes("chatbot")) targetHref = "/service/ai-chatbot";
+              else if (name.includes("branding")) targetHref = "/service/branding-design";
+
+              return (
+                <li key={link.name}>
+                  <Link 
+                    href={targetHref} 
+                    className="text-gray-500 text-sm hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -64,7 +79,7 @@ export default function Footer() {
           <h4 className="text-primary font-bold text-sm mb-6">Connect</h4>
           <div className="flex gap-3">
             
-            {/* Custom SVG untuk Instagram */}
+            {/* Instagram */}
             <Link 
               href="https://www.instagram.com/stackplus.studio/" 
               target="_blank" 
@@ -78,7 +93,7 @@ export default function Footer() {
               </svg>
             </Link>
 
-            {/* Custom SVG untuk LinkedIn */}
+            {/* LinkedIn */}
             <Link 
               href="https://www.linkedin.com/in/stackplus-studio-9440873a6/" 
               target="_blank" 
@@ -92,7 +107,7 @@ export default function Footer() {
               </svg>
             </Link>
             
-            {/* Custom SVG untuk TikTok */}
+            {/* TikTok */}
             <Link 
               href="https://www.tiktok.com/@stackplustudio826?_r=1&_t=ZS-95xyaQqXIW7" 
               target="_blank" 
@@ -115,7 +130,6 @@ export default function Footer() {
           © 2026 StackPlus. All rights reserved.
         </p>
         <div className="flex gap-6 text-sm text-gray-400">
-          {/* Ganti dengan link halaman Privacy & Terms asli kamu jika sudah ada */}
           <Link href="/privacy" className="hover:text-primary">Privacy Policy</Link>
           <Link href="/terms" className="hover:text-primary">Terms of Service</Link>
         </div>
