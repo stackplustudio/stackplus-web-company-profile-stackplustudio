@@ -52,12 +52,36 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Data JSON-LD untuk SEO Organisasi
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "StackPlus Studio",
+    "url": "https://stackplustudio.com",
+    "logo": "https://stackplustudio.com/icons/logo4.png",
+    "sameAs": [
+      "https://www.instagram.com/stackplus.studio/",
+      "https://www.tiktok.com/@stackplustudio826",
+      "https://www.linkedin.com/in/stackplus-studio-9440873a6/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "stackplustudio@gmail.com",
+      "contactType": "customer service"
+    },
+    "description": "Premium digital agency specializing in high-performance web development and advanced AI agent integration."
+  };
+
   return (
     <html lang="en" className="scroll-smooth">
-      {/* Kita tambahkan background warna cream terang di tag body */}
       <body className={`${jakartaSans.className} bg-[#FCFBF6] text-gray-900 antialiased`}>
+        {/* Schema.org JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        
         <Navbar />
-        {/* Tambahkan padding-top agar konten tidak tertutup navbar yang fixed */}
         <main className="min-h-screen pt-28">
           {children}
         </main>
