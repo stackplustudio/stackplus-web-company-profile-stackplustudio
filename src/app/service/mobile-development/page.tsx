@@ -140,6 +140,7 @@ export default function MobileDevPricingPage() {
       </section>
 
       {/* SECTION 2: EXPLORE OTHER SERVICES */}
+      {/* SECTION 2: EXPLORE OTHER SERVICES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="w-full h-px bg-gray-200 mb-16"></div>
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10">Explore Other Services</h2>
@@ -152,7 +153,18 @@ export default function MobileDevPricingPage() {
               <div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900">{item.title}</h3>
                 <p className="text-sm mb-6 line-clamp-2 text-gray-500">{item.desc}</p>
-                <Link href="#" className="inline-flex items-center text-sm font-bold gap-2 group text-primary">
+                {/* 👇 Logika href dimasukkan di sini, class desain tidak diubah sama sekali 👇 */}
+                <Link 
+                  href={
+                    item.title === "Web Development" ? "/service/web-development" : 
+                    item.title === "UI/UX Design" ? "/service/ui-ux-design" : 
+                    item.title === "Mobile Development" ? "/service/mobile-development" : 
+                    item.title === "AI ChatBot" ? "/service/ai-chatbot" : 
+                    item.title === "Branding Design" ? "/service/branding-design" : 
+                    "#"
+                  } 
+                  className="inline-flex items-center text-sm font-bold gap-2 group text-primary"
+                >
                   Learn More 
                   <svg className="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </Link>
