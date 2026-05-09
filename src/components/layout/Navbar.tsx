@@ -11,6 +11,7 @@ import Image from "next/image";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogoWhite, setIsLogoWhite] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   // Sembunyikan Navbar Web ini kalau lagi di halaman admin!
@@ -18,7 +19,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // PERBAIKAN: Menghapus class dengan kurung siku agar tidak error di browser
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
       const blueSections = document.querySelectorAll('#blue-section, .bg-blue-600, .bg-primary');
       let isOverBlue = false;
 
@@ -38,14 +44,21 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center pt-0">
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 flex flex-col items-center transition-all duration-300",
+      // PERUBAHAN DI SINI: Ditambah rounded-b-3xl (melengkung bawah) saat di-scroll
+      isScrolled ? "bg-white/70 backdrop-blur-md shadow-sm border-b border-gray-200 pb-3 rounded-b-3xl" : "bg-transparent pt-0"
+    )}>
       {/* Top Banner */}
       <div className="bg-[#3A3831] text-white text-xs font-medium px-6 py-1.5 rounded-b-2xl flex items-center gap-2 shadow-md">
         <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
         Available for new projects
       </div>
 
-      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 transition-all duration-500">
+      <nav className={cn(
+        "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500",
+        isScrolled ? "mt-3" : "mt-4" 
+      )}>
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="relative w-[150px] h-[45px] block">
@@ -93,7 +106,6 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center">
-            {/* LINK CALENDLY DIINTEGRASIKAN DI SINI */}
             <Link 
               href="https://calendly.com/stackplustudio/30min"
               target="_blank"
@@ -105,10 +117,10 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="md:hidden flex items-center bg-white/50 backdrop-blur-sm p-1 rounded-lg">
+          <div className="md:hidden flex items-center bg-white/50 backdrop-blur-sm p-1.5 rounded-lg border border-gray-100">
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-[#0053f1]"
+              className="text-gray-600 hover:text-[#0053f1] transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -116,26 +128,35 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Menu Mobile */}
       {isOpen && (
-        <div className="md:hidden w-full bg-white px-4 py-4 space-y-2 shadow-lg absolute top-[100%] mt-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block px-3 py-2 font-bold text-gray-700 hover:text-[#0053f1]"
-            >
-              {link.name}
-            </Link>
-          ))}
-          {/* Tambahan opsional: Tombol BOOK A SESSION di versi Mobile Menu agar klien dari HP juga bisa akses */}
+        <div className="md:hidden w-full absolute top-full left-0 bg-white/95 backdrop-blur-md border-t border-gray-100 px-6 py-6 space-y-3 shadow-xl animate-in slide-in-from-top-2 duration-300 rounded-b-3xl">
+          {navLinks.map((link) => {
+            const isActive = link.name === "HOME" ? pathname === "/" : pathname.includes(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  "block px-4 py-3 font-bold rounded-xl transition-all",
+                  isActive 
+                    ? "bg-[#0053f1]/10 text-[#0053f1]" 
+                    : "text-gray-700 hover:bg-gray-50 hover:text-[#0053f1]"
+                )}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
           <Link
             href="https://calendly.com/stackplustudio/30min"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 mt-4 text-center bg-[#423E3A] text-white font-bold rounded-lg hover:bg-[#2A2724]"
+            className="block px-4 py-4 mt-6 text-center bg-[#423E3A] text-white text-sm font-bold rounded-xl hover:bg-[#2A2724] transition-all shadow-md flex items-center justify-center gap-2"
           >
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
             BOOK A SESSION
           </Link>
         </div>
