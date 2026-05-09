@@ -101,7 +101,7 @@ export default function Navbar() {
               className="bg-[#423E3A] text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-[#2A2724] transition-all flex items-center gap-2"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-              DISCUSS NOW
+              BOOK A SESSION
             </Link>
           </div>
 
@@ -128,7 +128,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          {/* Tambahan opsional: Tombol Discuss Now di versi Mobile Menu agar klien dari HP juga bisa akses */}
+          {/* Tambahan opsional: Tombol BOOK A SESSION di versi Mobile Menu agar klien dari HP juga bisa akses */}
           <Link
             href="https://calendly.com/stackplustudio/30min"
             target="_blank"
@@ -136,7 +136,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(false)}
             className="block px-3 py-2 mt-4 text-center bg-[#423E3A] text-white font-bold rounded-lg hover:bg-[#2A2724]"
           >
-            DISCUSS NOW
+            BOOK A SESSION
           </Link>
         </div>
       )}

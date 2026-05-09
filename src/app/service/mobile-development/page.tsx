@@ -21,6 +21,13 @@ const getIcon = (title: string) => {
   }
 };
 
+// --- FUNGSI WHATSAPP DINAMIS ---
+const getWhatsAppLink = (planName: string) => {
+  const phoneNumber = "6281398410264"; 
+  const message = `Halo StackPlus Studio! Saya ingin diskusi mengenai layanan *Mobile Development* untuk paket *${planName}*. Bisa bantu informasinya?`;
+  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+};
+
 export default function MobileDevPricingPage() {
   const [activeTab, setActiveTab] = useState("GENERAL");
 
@@ -143,9 +150,17 @@ export default function MobileDevPricingPage() {
                     ))}
                   </div>
                 </div>
-                <button className={cn("w-full py-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] mt-auto", plan.is_pro ? "bg-[#423E3A] text-white hover:bg-[#2A2724]" : "bg-[#423E3A] text-white hover:bg-[#2A2724] hover:shadow-lg")}>
+                
+                {/* --- BAGIAN YANG DIUBAH HANYA INI (Link ke WA) --- */}
+                <a 
+                  href={getWhatsAppLink(plan.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn("w-full py-4 rounded-full text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] mt-auto", plan.is_pro ? "bg-[#423E3A] text-white hover:bg-[#2A2724]" : "bg-[#423E3A] text-white hover:bg-[#2A2724] hover:shadow-lg")}
+                >
                   <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span> DISCUSS NOW
-                </button>
+                </a>
+
               </div>
             ))
           )}
