@@ -1,47 +1,70 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Bot, X, Send, Sparkles, MessageSquare } from "lucide-react";
+import { Bot, X, Send, Sparkles, MessageSquare, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Pesan bawaan (Dummy)
+  // Mengambil URL dari env, fallback ke localhost jika tidak ada
+  const API_URL = process.env.NEXT_PUBLIC_AI_API_URL || "http://127.0.0.1:8000";
+
+  // Pesan Awal
   const [messages, setMessages] = useState([
     { 
       role: "bot", 
       text: "Halo! Saya AI Assistant StackPlus. Ada yang ingin kamu ketahui tentang layanan kami?" 
-    },
-    { 
-      role: "bot", 
-      text: "⚠️ Info: Saat ini saya (Chatbot RAG) masih dalam tahap development oleh tim AI kami ya. Segera hadir dengan kepintaran penuh! 🚀" 
     }
   ]);
 
-  // Efek auto-scroll ke bawah tiap ada pesan baru
+  // Efek auto-scroll ke bawah tiap ada pesan baru atau loading
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isOpen]);
+    if (isOpen) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isLoading, isOpen]);
 
-  // Simulasi pengiriman pesan (Biar UI-nya kerasa hidup meski belum connect backend)
-  const handleSend = (e: React.FormEvent) => {
+  // Fungsi pengiriman pesan ke Backend FastAPI
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
-    // Masukkan pesan user
-    setMessages((prev) => [...prev, { role: "user", text: input }]);
+    const userMessage = input.trim();
+    setMessages((prev) => [...prev, { role: "user", text: userMessage }]);
     setInput("");
+    setIsLoading(true);
 
-    // Balasan otomatis dari bot (karena masih development)
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${API_URL}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      const data = await response.json();
+      
+      // Ambil field 'answer' dari response backend
       setMessages((prev) => [
         ...prev, 
-        { role: "bot", text: "Terima kasih pesannya! Seperti yang diinfokan, saya masih dalam tahap development dan belum terhubung ke database. Harap maklum ya! 🙏" }
+        { role: "bot", text: data.answer || "Maaf, saya tidak mendapatkan jawaban." }
       ]);
-    }, 1000);
+    } catch (error) {
+      console.error("Chat Error:", error);
+      setMessages((prev) => [
+        ...prev, 
+        { role: "bot", text: "Maaf, terjadi gangguan koneksi ke server AI kami. Silakan coba lagi nanti." }
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -63,7 +86,7 @@ export default function Chatbot() {
                 </h3>
                 <p className="text-[10px] text-blue-100 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
-                  In Development
+                  Online
                 </p>
               </div>
             </div>
@@ -97,6 +120,16 @@ export default function Chatbot() {
                 </div>
               </div>
             ))}
+
+            {/* Indicator Loading saat AI Berpikir */}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-sm shadow-sm flex items-center gap-2 text-gray-400 text-xs italic">
+                  <Loader2 size={14} className="animate-spin" />
+                  AI sedang mengetik...
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
 
@@ -107,15 +140,20 @@ export default function Chatbot() {
                 type="text" 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Tanya apa saja..." 
-                className="flex-1 bg-gray-50 border border-gray-200 rounded-full pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-[#0053f1] transition-colors"
+                placeholder={isLoading ? "AI sedang memproses..." : "Tanya apa saja..."} 
+                disabled={isLoading}
+                className="flex-1 bg-gray-50 border border-gray-200 rounded-full pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-[#0053f1] transition-colors disabled:opacity-50"
               />
               <button 
                 type="submit"
-                disabled={!input.trim()}
+                disabled={!input.trim() || isLoading}
                 className="absolute right-1 top-1 w-8 h-8 bg-[#0053f1] rounded-full flex items-center justify-center text-white disabled:bg-gray-300 disabled:text-gray-500 transition-colors"
               >
-                <Send size={14} className="ml-0.5" />
+                {isLoading ? (
+                  <Loader2 size={14} className="animate-spin" />
+                ) : (
+                  <Send size={14} className="ml-0.5" />
+                )}
               </button>
             </form>
           </div>
@@ -131,7 +169,6 @@ export default function Chatbot() {
           isOpen ? "bg-red-500 rotate-90" : "hover:shadow-[#0053f1]/30"
         )}
       >
-        {/* Efek Ping / Glow di belakang tombol saat belum dibuka */}
         {!isOpen && (
           <span className="absolute inset-0 rounded-full bg-[#0053f1] opacity-40 animate-ping"></span>
         )}
