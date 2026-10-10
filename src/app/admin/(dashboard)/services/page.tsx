@@ -60,11 +60,11 @@ export default function ServicesAdminPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-2">› MANAGEMENT ‹</p>
-          <h1 className="text-4xl font-bold text-[#423E3A] tracking-tight">Services & Pricing</h1>
+          <h1 className="text-4xl font-bold text-ink tracking-tight">Services & Pricing</h1>
         </div>
         <Link 
           href="/admin/services/create" 
-          className="bg-[#0053f1] text-white px-6 py-3 rounded-[16px] text-sm font-bold hover:bg-[#003cb3] transition-colors shadow-md shadow-[#0053f1]/20 flex items-center gap-2"
+          className="bg-primary text-white px-6 py-3 rounded-[16px] text-sm font-bold hover:bg-primary-dark transition-colors shadow-md shadow-primary/20 flex items-center gap-2"
         >
           <span className="text-lg">+</span> Add New Package
         </Link>
@@ -75,7 +75,7 @@ export default function ServicesAdminPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#FDFBF7] border-b border-gray-100">
+              <tr className="bg-surface border-b border-gray-100">
                 <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Service Type</th>
                 <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Category</th>
                 <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Package Name</th>
@@ -98,11 +98,11 @@ export default function ServicesAdminPage() {
               ) : (
                 services.map((item) => (
                   <tr key={item.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-6 font-medium text-[#423E3A]">{item.service_type}</td>
+                    <td className="py-4 px-6 font-medium text-ink">{item.service_type}</td>
                     <td className="py-4 px-6 text-sm text-gray-500">{item.category}</td>
                     <td className="py-4 px-6">
                       <span className={`px-3 py-1 rounded-[16px] text-xs font-bold ${
-                        item.is_pro ? 'bg-[#0053f1]/10 text-[#0053f1]' : 'bg-[#EAE5D9]/30 text-[#423E3A]'
+                        item.is_pro ? 'bg-primary/10 text-primary' : 'bg-line/30 text-ink'
                       }`}>
                         {item.name} {item.is_pro && '✨'}
                       </span>
@@ -110,7 +110,7 @@ export default function ServicesAdminPage() {
                     <td className="py-4 px-6 text-right">
                       <div className="flex justify-end gap-2">
                         {/* Tombol Edit untuk tahap selanjutnya */}
-                        <Link href={`/admin/services/edit/${item.id}`} className="text-gray-400 hover:text-[#0053f1] transition-colors text-sm font-medium px-2 py-1">
+                        <Link href={`/admin/services/edit/${item.id}`} className="text-gray-400 hover:text-primary transition-colors text-sm font-medium px-2 py-1">
                           Edit
                         </Link>
                         {/* Tombol Delete yang sudah berfungsi */}

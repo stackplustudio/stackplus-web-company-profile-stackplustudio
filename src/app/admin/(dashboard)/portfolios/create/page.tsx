@@ -102,32 +102,32 @@ export default function CreatePortfolioPage() {
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-4xl">
       <div className="mb-8">
-        <Link href="/admin/portfolios" className="text-[#0053f1] text-xs font-bold mb-4 inline-block hover:underline">
+        <Link href="/admin/portfolios" className="text-primary text-xs font-bold mb-4 inline-block hover:underline">
           ← BACK TO LIST
         </Link>
-        <h1 className="text-4xl font-bold text-[#423E3A] tracking-tight">Add New Project</h1>
+        <h1 className="text-4xl font-bold text-ink tracking-tight">Add New Project</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 md:p-10 rounded-[16px] border border-gray-100 shadow-sm">
         {/* Basic Info Row (TETAP SAMA SEPERTI ASLINYA) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#423E3A]">Project Title</label>
+            <label className="text-sm font-bold text-ink">Project Title</label>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Faheema Academy"
-              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all"
+              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#423E3A]">Category</label>
+            <label className="text-sm font-bold text-ink">Category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all bg-white"
+              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all bg-white"
             >
               {portfolioCategories.map((cat) => (
                 <option key={cat} value={cat}>{cat}</option>
@@ -135,13 +135,13 @@ export default function CreatePortfolioPage() {
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#423E3A]">Year</label>
+            <label className="text-sm font-bold text-ink">Year</label>
             <input
               type="text"
               required
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all"
+              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all"
             />
           </div>
         </div>
@@ -149,8 +149,8 @@ export default function CreatePortfolioPage() {
         {/* Dynamic Features Section (TETAP SAMA SEPERTI ASLINYA) */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <label className="text-sm font-bold text-[#423E3A]">Features / Scope</label>
-            <button type="button" onClick={addFeature} className="text-[#0053f1] text-xs font-bold hover:underline">
+            <label className="text-sm font-bold text-ink">Features / Scope</label>
+            <button type="button" onClick={addFeature} className="text-primary text-xs font-bold hover:underline">
               + Add Feature
             </button>
           </div>
@@ -162,7 +162,7 @@ export default function CreatePortfolioPage() {
                 value={feature}
                 onChange={(e) => updateFeature(index, e.target.value)}
                 placeholder="e.g. Responsive Design"
-                className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all"
+                className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all"
               />
             ))}
           </div>
@@ -171,8 +171,8 @@ export default function CreatePortfolioPage() {
         {/* --- BAGIAN YANG DIUBAH: DARI TEXT INPUT MENJADI FILE INPUT --- */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <label className="text-sm font-bold text-[#423E3A]">Upload Images</label>
-            <button type="button" onClick={addImageSlot} className="text-[#0053f1] text-xs font-bold hover:underline">
+            <label className="text-sm font-bold text-ink">Upload Images</label>
+            <button type="button" onClick={addImageSlot} className="text-primary text-xs font-bold hover:underline">
               + Add Another Image
             </button>
           </div>
@@ -183,7 +183,7 @@ export default function CreatePortfolioPage() {
                   type="file"
                   accept="image/png, image/jpeg, image/jpg, image/webp"
                   onChange={(e) => handleFileChange(index, e)}
-                  className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                  className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                 />
                 {/* Preview nama file jika sudah dipilih */}
                 {file && <span className="text-xs text-gray-500 ml-2">Selected: {file.name}</span>}
@@ -196,7 +196,7 @@ export default function CreatePortfolioPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#0053f1] text-white py-4 rounded-[16px] font-bold hover:bg-[#003cb3] transition-all shadow-lg shadow-[#0053f1]/20 disabled:bg-gray-400"
+            className="w-full bg-primary text-white py-4 rounded-[16px] font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:bg-gray-400"
           >
             {isLoading ? "Processing..." : "SAVE PROJECT"}
           </button>

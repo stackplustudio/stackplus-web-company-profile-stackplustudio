@@ -17,9 +17,9 @@ export default function ValueSection() {
         <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">
           › VALUE ‹
         </p>
-        <h2 className="text-5xl md:text-6xl font-medium text-[#423E3A] leading-[1.1] tracking-tight">
+        <h2 className="text-5xl md:text-6xl font-medium text-ink leading-[1.1] tracking-tight">
           Creating Smart Lasting <br />
-          <span className="text-[#0053f1] font-bold">Digital Solutions</span>
+          <span className="text-primary font-bold">Digital Solutions</span>
         </h2>
       </div>
 

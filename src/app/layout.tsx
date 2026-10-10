@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Chatbot from "@/components/ui/Chatbot";
+import { SITE } from "@/lib/site";
 
-const jakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
+// Satu font untuk seluruh situs. Dimuat lokal (self-hosted) sebagai variable font 200-800,
+// diekspos sebagai CSS variable --font-sans yang dipakai Tailwind (font-sans).
+const jakartaSans = localFont({
+  src: "../fonts/PlusJakartaSans-Variable.woff2",
+  weight: "200 800",
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "StackPlus Studio | Custom Web Development & Agentic AI Solutions",
@@ -59,22 +67,18 @@ export default function RootLayout({
     "name": "StackPlus Studio",
     "url": "https://stackplustudio.com",
     "logo": "https://stackplustudio.com/icons/logo4.png",
-    "sameAs": [
-      "https://www.instagram.com/stackplus.studio/",
-      "https://www.tiktok.com/@stackplustudio826",
-      "https://www.linkedin.com/in/stackplus-studio-9440873a6/"
-    ],
+    "sameAs": [SITE.social.instagram, SITE.social.tiktok, SITE.social.linkedin],
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "stackplustudio@gmail.com",
+      "email": SITE.email,
       "contactType": "customer service"
     },
     "description": "Premium digital agency specializing in high-performance web development and advanced AI agent integration."
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${jakartaSans.className} bg-[#FCFBF6] text-gray-900 antialiased`}>
+    <html lang="en" className={`${jakartaSans.variable} scroll-smooth`}>
+      <body className="font-sans bg-background text-gray-900 antialiased">
         {/* Schema.org JSON-LD */}
         <script
           type="application/ld+json"

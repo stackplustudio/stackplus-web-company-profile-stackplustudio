@@ -7,15 +7,13 @@ import { Menu, X } from "lucide-react";
 import { navLinks } from "@/data";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { SITE } from "@/lib/site";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogoWhite, setIsLogoWhite] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-
-  // Sembunyikan Navbar Web ini kalau lagi di halaman admin!
-  if (pathname?.startsWith("/admin")) return null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +23,7 @@ export default function Navbar() {
         setIsScrolled(false);
       }
 
-      const blueSections = document.querySelectorAll('#blue-section, .bg-blue-600, .bg-primary');
+      const blueSections = document.querySelectorAll('[data-blue-section]');
       let isOverBlue = false;
 
       blueSections.forEach((section) => {
@@ -42,6 +40,10 @@ export default function Navbar() {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Sembunyikan Navbar Web ini kalau lagi di halaman admin.
+  // Harus setelah semua hooks agar urutan hooks selalu sama di setiap render.
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <header className={cn(
@@ -95,7 +97,7 @@ export default function Navbar() {
                   className={cn(
                     "px-6 py-2 rounded-full text-xs font-bold transition-all duration-300",
                     isActive 
-                      ? "bg-[#0053f1] text-white shadow-md" 
+                      ? "bg-primary text-white shadow-md" 
                       : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
                   )}
                 >
@@ -107,10 +109,10 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center">
             <Link 
-              href="https://calendly.com/stackplustudio/30min"
+              href={SITE.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#423E3A] text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-[#2A2724] transition-all flex items-center gap-2"
+              className="bg-ink text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-ink-dark transition-all flex items-center gap-2"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
               BOOK A SESSION
@@ -120,7 +122,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center bg-white/50 backdrop-blur-sm p-1.5 rounded-lg border border-gray-100">
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-[#0053f1] transition-colors"
+              className="text-gray-600 hover:text-primary transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -141,8 +143,8 @@ export default function Navbar() {
                 className={cn(
                   "block px-4 py-3 font-bold rounded-xl transition-all",
                   isActive 
-                    ? "bg-[#0053f1]/10 text-[#0053f1]" 
-                    : "text-gray-700 hover:bg-gray-50 hover:text-[#0053f1]"
+                    ? "bg-primary/10 text-primary" 
+                    : "text-gray-700 hover:bg-gray-50 hover:text-primary"
                 )}
               >
                 {link.name}
@@ -150,11 +152,11 @@ export default function Navbar() {
             );
           })}
           <Link
-            href="https://calendly.com/stackplustudio/30min"
+            href={SITE.calendly}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="block px-4 py-4 mt-6 text-center bg-[#423E3A] text-white text-sm font-bold rounded-xl hover:bg-[#2A2724] transition-all shadow-md flex items-center justify-center gap-2"
+            className="block px-4 py-4 mt-6 text-center bg-ink text-white text-sm font-bold rounded-xl hover:bg-ink-dark transition-all shadow-md flex items-center justify-center gap-2"
           >
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
             BOOK A SESSION

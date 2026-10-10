@@ -124,7 +124,7 @@ export default function EditServicePage() {
   if (isFetching) {
     return (
       <div className="flex justify-center items-center h-[60vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0053f1]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -132,32 +132,32 @@ export default function EditServicePage() {
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-5xl mx-auto">
       <div className="mb-8">
-        <Link href="/admin/services" className="text-[#0053f1] text-xs font-bold mb-4 inline-block hover:underline">
+        <Link href="/admin/services" className="text-primary text-xs font-bold mb-4 inline-block hover:underline">
           ← BACK TO LIST
         </Link>
-        <h1 className="text-4xl font-bold text-[#423E3A] tracking-tight">Edit Package</h1>
+        <h1 className="text-4xl font-bold text-ink tracking-tight">Edit Package</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 md:p-10 rounded-[16px] border border-gray-100 shadow-sm">
         
         {/* Baris 1: Klasifikasi */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#FDFBF7] p-6 rounded-[16px] border border-[#EAE5D9]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-surface p-6 rounded-[16px] border border-line">
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#423E3A]">Service Type</label>
+            <label className="text-sm font-bold text-ink">Service Type</label>
             <select
               value={serviceType}
               onChange={handleServiceTypeChange}
-              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all bg-white font-medium"
+              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all bg-white font-medium"
             >
               {serviceTypes.map(type => <option key={type} value={type}>{type}</option>)}
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#423E3A]">Category</label>
+            <label className="text-sm font-bold text-ink">Category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all bg-white font-medium"
+              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all bg-white font-medium"
             >
               {categoryMap[serviceType]?.map(cat => <option key={cat} value={cat}>{cat}</option>)}
             </select>
@@ -167,26 +167,26 @@ export default function EditServicePage() {
         {/* Baris 2: Detail Paket */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#423E3A]">Package Name</label>
+            <label className="text-sm font-bold text-ink">Package Name</label>
             <input
               type="text" required value={name} onChange={(e) => setName(e.target.value)}
-              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all"
+              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all"
             />
           </div>
           <div className="flex items-center gap-4 mt-6">
             <input 
               type="checkbox" id="isPro" checked={isPro} onChange={(e) => setIsPro(e.target.checked)}
-              className="w-5 h-5 accent-[#0053f1] rounded cursor-pointer"
+              className="w-5 h-5 accent-primary rounded cursor-pointer"
             />
-            <label htmlFor="isPro" className="text-sm font-bold text-[#423E3A] cursor-pointer">
+            <label htmlFor="isPro" className="text-sm font-bold text-ink cursor-pointer">
               Highlight as "PRO" Package (Warna Biru) ✨
             </label>
           </div>
           <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="text-sm font-bold text-[#423E3A]">Short Description</label>
+            <label className="text-sm font-bold text-ink">Short Description</label>
             <input
               type="text" value={description} onChange={(e) => setDescription(e.target.value)}
-              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all"
+              className="px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all"
             />
           </div>
         </div>
@@ -198,31 +198,31 @@ export default function EditServicePage() {
           
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-bold text-[#423E3A]">Benefits / Features</label>
-              <button type="button" onClick={() => addArrayItem(setBenefits, benefits)} className="text-[#0053f1] text-xs font-bold hover:underline">+ Add</button>
+              <label className="text-sm font-bold text-ink">Benefits / Features</label>
+              <button type="button" onClick={() => addArrayItem(setBenefits, benefits)} className="text-primary text-xs font-bold hover:underline">+ Add</button>
             </div>
             {benefits.map((item, index) => (
-              <input key={index} type="text" value={item} onChange={(e) => handleArrayChange(setBenefits, benefits, index, e.target.value)} className="w-full px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all mb-2"/>
+              <input key={index} type="text" value={item} onChange={(e) => handleArrayChange(setBenefits, benefits, index, e.target.value)} className="w-full px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all mb-2"/>
             ))}
           </div>
 
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-bold text-[#423E3A]">Programming / Stack</label>
-              <button type="button" onClick={() => addArrayItem(setCodeTypes, codeTypes)} className="text-[#0053f1] text-xs font-bold hover:underline">+ Add</button>
+              <label className="text-sm font-bold text-ink">Programming / Stack</label>
+              <button type="button" onClick={() => addArrayItem(setCodeTypes, codeTypes)} className="text-primary text-xs font-bold hover:underline">+ Add</button>
             </div>
             {codeTypes.map((item, index) => (
-              <input key={index} type="text" value={item} onChange={(e) => handleArrayChange(setCodeTypes, codeTypes, index, e.target.value)} className="w-full px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all mb-2"/>
+              <input key={index} type="text" value={item} onChange={(e) => handleArrayChange(setCodeTypes, codeTypes, index, e.target.value)} className="w-full px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all mb-2"/>
             ))}
           </div>
 
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-bold text-[#423E3A]">Tech / Tools</label>
-              <button type="button" onClick={() => addArrayItem(setTechTools, techTools)} className="text-[#0053f1] text-xs font-bold hover:underline">+ Add</button>
+              <label className="text-sm font-bold text-ink">Tech / Tools</label>
+              <button type="button" onClick={() => addArrayItem(setTechTools, techTools)} className="text-primary text-xs font-bold hover:underline">+ Add</button>
             </div>
             {techTools.map((item, index) => (
-              <input key={index} type="text" value={item} onChange={(e) => handleArrayChange(setTechTools, techTools, index, e.target.value)} className="w-full px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-[#0053f1] text-sm transition-all mb-2"/>
+              <input key={index} type="text" value={item} onChange={(e) => handleArrayChange(setTechTools, techTools, index, e.target.value)} className="w-full px-4 py-3 rounded-[16px] border border-gray-200 focus:outline-none focus:border-primary text-sm transition-all mb-2"/>
             ))}
           </div>
           
@@ -231,7 +231,7 @@ export default function EditServicePage() {
         <div className="pt-8">
           <button
             type="submit" disabled={isLoading}
-            className="w-full bg-[#0053f1] text-white py-4 rounded-[16px] font-bold hover:bg-[#003cb3] transition-all shadow-lg shadow-[#0053f1]/20 disabled:bg-gray-400"
+            className="w-full bg-primary text-white py-4 rounded-[16px] font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:bg-gray-400"
           >
             {isLoading ? "Updating Database..." : "UPDATE PACKAGE"}
           </button>

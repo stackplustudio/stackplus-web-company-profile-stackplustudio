@@ -10,8 +10,8 @@ export default function WhoWeAre() {
         <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">
           › ABOUT US ‹
         </p>
-        <h1 className="text-5xl md:text-6xl font-medium text-[#423E3A] tracking-tight">
-          Who <span className="text-[#0053f1] font-bold">We</span> Are
+        <h1 className="text-5xl md:text-6xl font-medium text-ink tracking-tight">
+          Who <span className="text-primary font-bold">We</span> Are
         </h1>
       </div>
 
@@ -19,7 +19,7 @@ export default function WhoWeAre() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Left Card: Text & CTA */}
-        <div className="bg-[#FDFBF7] border border-[#EAE5D9] rounded-[16px] p-10 lg:p-14 flex flex-col justify-between shadow-sm">
+        <div className="bg-surface border border-line rounded-[16px] p-10 lg:p-14 flex flex-col justify-between shadow-sm">
           <h2 className="text-3xl md:text-4xl font-medium text-gray-900 leading-tight max-w-sm mb-16">
             A Digital Product Solution Studio
           </h2>
@@ -30,7 +30,7 @@ export default function WhoWeAre() {
             </p>
             <Link 
               href="#contact" 
-              className="inline-block bg-[#0053f1] text-white px-8 py-3.5 rounded-xl text-sm font-medium hover:bg-[#003cb3] transition-colors shadow-md"
+              className="inline-block bg-primary text-white px-8 py-3.5 rounded-xl text-sm font-medium hover:bg-primary-dark transition-colors shadow-md"
             >
               Start a project
             </Link>
@@ -38,7 +38,7 @@ export default function WhoWeAre() {
         </div>
 
         {/* Right Card: Logo */}
-        <div className="bg-[#0053f1] rounded-[16px] flex items-center justify-center p-10 lg:p-14 min-h-[400px] shadow-lg relative overflow-hidden">
+        <div data-blue-section className="bg-primary rounded-[16px] flex items-center justify-center p-10 lg:p-14 min-h-[400px] shadow-lg relative overflow-hidden">
           {/* Latar Belakang Dekoratif (Glow) */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           

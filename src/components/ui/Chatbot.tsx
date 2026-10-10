@@ -18,7 +18,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     { 
       role: "bot", 
-      text: "Halo! Saya AI Assistant StackPlus Studio. Ada yang ingin kamu ketahui tentang layanan kami?" 
+      text: "Hi! I'm the StackPlus Studio AI Assistant. What would you like to know about our services?" 
     }
   ]);
 
@@ -55,13 +55,13 @@ export default function Chatbot() {
       // Ambil field 'answer' dari response backend
       setMessages((prev) => [
         ...prev, 
-        { role: "bot", text: data.answer || "Maaf, saya tidak mendapatkan jawaban." }
+        { role: "bot", text: data.answer || "Sorry, I couldn't come up with an answer." }
       ]);
     } catch (error) {
       console.error("Chat Error:", error);
       setMessages((prev) => [
         ...prev, 
-        { role: "bot", text: "Maaf, terjadi gangguan koneksi ke server AI kami. Silakan coba lagi nanti." }
+        { role: "bot", text: "Sorry, we couldn't reach our AI server. Please try again later." }
       ]);
     } finally {
       setIsLoading(false);
@@ -75,7 +75,7 @@ export default function Chatbot() {
       {isOpen && (
         <div 
           className={cn(
-            "bg-[#FDFBF7] shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300",
+            "bg-surface shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300",
             // PERBAIKAN BUG MOBILE DI SINI:
             // max-h-[calc(100dvh-120px)] memastikan tinggi otomatis menyusut di HP yang layarnya pendek (header tidak terpotong)
             // w-[calc(100vw-3rem)] memastikan lebar pas penuh di HP menyisakan margin estetik
@@ -86,7 +86,7 @@ export default function Chatbot() {
         >
           
           {/* Header */}
-          <div className="bg-[#0053f1] w-full flex justify-center shrink-0">
+          <div className="bg-primary w-full flex justify-center shrink-0">
             <div className={cn(
               "flex items-center justify-between w-full p-3",
               isMaximized ? "max-w-4xl md:p-4" : "" 
@@ -111,7 +111,7 @@ export default function Chatbot() {
                 <button 
                   onClick={() => setIsMaximized(!isMaximized)}
                   className="text-white/80 hover:text-white transition-colors p-1"
-                  title={isMaximized ? "Perkecil Layar" : "Perbesar Layar"}
+                  title={isMaximized ? "Exit full screen" : "Full screen"}
                 >
                   {isMaximized ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                 </button>
@@ -121,7 +121,7 @@ export default function Chatbot() {
                     setIsMaximized(false); // Reset ukuran saat ditutup
                   }}
                   className="text-white/80 hover:text-white transition-colors p-1"
-                  title="Tutup Chat"
+                  title="Close chat"
                 >
                   <X size={20} />
                 </button>
@@ -148,7 +148,7 @@ export default function Chatbot() {
                       "p-3.5 text-sm rounded-2xl shadow-sm whitespace-pre-wrap leading-relaxed",
                       isMaximized ? "max-w-[90%] md:max-w-[75%]" : "max-w-[85%]",
                       msg.role === "user" 
-                        ? "bg-[#0053f1] text-white rounded-tr-sm" 
+                        ? "bg-primary text-white rounded-tr-sm" 
                         : "bg-white border border-gray-100 text-gray-700 rounded-tl-sm"
                     )}
                   >
@@ -162,7 +162,7 @@ export default function Chatbot() {
                 <div className="flex justify-start">
                   <div className="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-sm shadow-sm flex items-center gap-2 text-gray-400 text-xs italic">
                     <Loader2 size={14} className="animate-spin" />
-                    AI sedang mengetik...
+                    AI is typing...
                   </div>
                 </div>
               )}
@@ -183,14 +183,14 @@ export default function Chatbot() {
                 type="text" 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={isLoading ? "AI sedang memproses..." : "Tanya apa saja..."} 
+                placeholder={isLoading ? "AI is thinking..." : "Ask me anything..."} 
                 disabled={isLoading}
-                className="flex-1 bg-gray-50 border border-gray-200 rounded-full pl-5 pr-12 py-3 text-sm focus:outline-none focus:border-[#0053f1] focus:bg-white transition-all disabled:opacity-50"
+                className="flex-1 bg-gray-50 border border-gray-200 rounded-full pl-5 pr-12 py-3 text-sm focus:outline-none focus:border-primary focus:bg-white transition-all disabled:opacity-50"
               />
               <button 
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="absolute right-1.5 top-1.5 w-9 h-9 bg-[#0053f1] rounded-full flex items-center justify-center text-white disabled:bg-gray-300 disabled:text-gray-500 transition-colors"
+                className="absolute right-1.5 top-1.5 w-9 h-9 bg-primary rounded-full flex items-center justify-center text-white disabled:bg-gray-300 disabled:text-gray-500 transition-colors"
               >
                 {isLoading ? (
                   <Loader2 size={16} className="animate-spin" />
@@ -208,13 +208,13 @@ export default function Chatbot() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-14 h-14 bg-[#0053f1] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-all duration-300 relative group z-[60]",
-          isOpen ? "bg-red-500 rotate-90" : "hover:shadow-[#0053f1]/30",
+          "w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-all duration-300 relative group z-[60]",
+          isOpen ? "bg-red-500 rotate-90" : "hover:shadow-primary/30",
           (isMaximized && isOpen) && "opacity-0 scale-0 pointer-events-none" 
         )}
       >
         {!isOpen && (
-          <span className="absolute inset-0 rounded-full bg-[#0053f1] opacity-40 animate-ping"></span>
+          <span className="absolute inset-0 rounded-full bg-primary opacity-40 animate-ping"></span>
         )}
         
         {isOpen ? <X size={24} /> : <MessageSquare size={24} />}

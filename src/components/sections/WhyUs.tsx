@@ -21,7 +21,7 @@ export default function WhyUs() {
           <p className="text-gray-500 text-sm mb-6 leading-relaxed">
             Because we don&apos;t just build products, we build solutions that create measurable impact.
           </p>
-          <Link href="#contact" className="inline-flex items-center bg-[#423E3A] text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-[#2A2724] transition-all gap-2">
+          <Link href="#contact" className="inline-flex items-center bg-ink text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-ink-dark transition-all gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
             Book a Call
           </Link>
@@ -32,7 +32,7 @@ export default function WhyUs() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Box 1: Quality */}
-        <div className="lg:col-span-4 bg-[#FDFBF7] rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
+        <div className="lg:col-span-4 bg-surface rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
           <h3 className="text-xl font-bold text-gray-900 mb-2">Quality</h3>
           <p className="text-sm text-gray-500 mb-auto">Excellence in<br/>every design detail</p>
           
@@ -53,7 +53,7 @@ export default function WhyUs() {
         </div>
 
         {/* Box 2: Product-Driven Approach */}
-        <div className="lg:col-span-8 bg-[#FDFBF7] rounded-[16px] border border-gray-100 p-2 flex flex-col md:flex-row shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
+        <div className="lg:col-span-8 bg-surface rounded-[16px] border border-gray-100 p-2 flex flex-col md:flex-row shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
           <div className="w-full md:w-1/2 bg-gray-200 rounded-[1.5rem] relative overflow-hidden min-h-[200px]">
              {/* Ganti Placeholder Foto Tim Bekerja */}
              <div className="relative w-full h-full overflow-hidden rounded-2xl">
@@ -77,7 +77,7 @@ export default function WhyUs() {
         </div>
 
         {/* Box 3: One Integrated Stack */}
-        <div className="lg:col-span-5 bg-primary rounded-[16px] p-8 flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden h-full min-h-[320px]">
+        <div data-blue-section className="lg:col-span-5 bg-primary rounded-[16px] p-8 flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden h-full min-h-[320px]">
           <h3 className="text-2xl font-medium text-white mb-auto mt-4">One Integrated Stack</h3>
           <div className="mt-8 relative w-full flex flex-col items-center">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-12 bg-[#8B5CF6] blur-2xl opacity-70"></div>
@@ -88,7 +88,7 @@ export default function WhyUs() {
 
         {/* Box 4: Business-Focused UX */}
         {/* Box 4: Business-Focused UX */}
-        <div className="lg:col-span-7 bg-[#FDFBF7] rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
+        <div className="lg:col-span-7 bg-surface rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
           <h3 className="text-xl font-bold text-gray-900 mb-2">Business-Focused UX</h3>
           <p className="text-sm text-gray-500 mb-12">Clear flows built to drive conversion and growth.</p>
           <div className="flex flex-row justify-center items-end gap-4 md:gap-12 w-full">
@@ -114,7 +114,7 @@ export default function WhyUs() {
         </div>
 
         {/* Box 5: Built for Modern Standards */}
-        <div className="lg:col-span-4 bg-[#FDFBF7] rounded-[16px] border border-gray-100 p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
+        <div className="lg:col-span-4 bg-surface rounded-[16px] border border-gray-100 p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
           <h3 className="text-xl font-bold text-gray-900 mb-2">Built for<br/>Modern Standards</h3>
           <p className="text-sm text-gray-500 mb-8">Optimized for speed, scalability, and trust.</p>
           <div className="mt-auto w-full h-32 bg-gray-200 rounded-xl overflow-hidden relative">
@@ -131,7 +131,7 @@ export default function WhyUs() {
         </div>
 
         {/* Box 6: Strategic Partnership */}
-        <div className="lg:col-span-8 bg-[#FDFBF7] rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
+        <div className="lg:col-span-8 bg-surface rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
           <h3 className="text-xl font-bold text-gray-900 mb-8">Strategic Partnership</h3>
           <div className="w-full max-w-md flex flex-col items-center">
             {["MEDIA PUBLISHING", "E-COMMERCE & D2C", "ARCHITECTURE & INTERIORS", "EDUCATION & LEARNING"].map((item, i) => (

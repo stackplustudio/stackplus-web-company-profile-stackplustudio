@@ -3,7 +3,7 @@ export const navLinks = [
   { name: "HOME", href: "/" },
   { name: "ABOUT", href: "/about" },
   { name: "SERVICE", href: "/service" },
-  { name: "PORTOFOLIO", href: "/portfolio" },
+  { name: "PORTFOLIO", href: "/portfolio" },
   { name: "CONTACT", href: "/contact" },
 ];
 
@@ -124,7 +124,7 @@ export const teamData = [
     role: "SOCIAL MEDIA SPESIALIST", 
     image: "/images/arief.jpeg",
     instagram: "https://www.instagram.com/ariefrachh/",
-    linkedin: " https://www.linkedin.com/in/arief-rachman25/"
+    linkedin: "https://www.linkedin.com/in/arief-rachman25/"
   },
 ];
 // --- DATA KATEGORI & DETAIL PORTFOLIO ---

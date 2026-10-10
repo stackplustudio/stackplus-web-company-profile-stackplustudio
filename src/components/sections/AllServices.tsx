@@ -24,9 +24,9 @@ export default function AllServices() {
         <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">
           › SERVICE ‹
         </p>
-        <h1 className="text-5xl md:text-6xl font-medium text-[#423E3A] tracking-tight">
+        <h1 className="text-5xl md:text-6xl font-medium text-ink tracking-tight">
           Our Expertise That <br />
-          <span className="text-[#0053f1] font-bold">Drives Impact</span>
+          <span className="text-primary font-bold">Drives Impact</span>
         </h1>
       </div>
 
@@ -35,11 +35,12 @@ export default function AllServices() {
         {expertiseData.map((item, index) => (
           <div 
             key={index}
+            data-blue-section={item.isActive ? true : undefined}
             className={cn(
               "p-8 rounded-2xl flex flex-col justify-between h-[280px] transition-all duration-300",
               item.isActive 
                 ? "bg-primary text-white shadow-xl shadow-primary/20" 
-                : "bg-[#FDFBF7] border border-[#EAE5D9] text-gray-900 hover:shadow-md"
+                : "bg-surface border border-line text-gray-900 hover:shadow-md"
             )}
           >
             {/* Ikon Dinamis yang sudah diganti */}

@@ -42,14 +42,14 @@ export default function PortfolioShowcase() {
     : portfolios.filter(item => item.category === activeCategory);
 
   return (
-    <section className="py-20 bg-[#FDFBF7] min-h-screen">
+    <section className="py-20 bg-surface min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header & Tabs */}
         <div className="text-center mb-16">
-          <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">› PORTOFOLIO ‹</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-[#423E3A] tracking-tight mb-6">
-            All <span className="text-[#0053f1]">Projects</span>
+          <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">› PORTFOLIO ‹</p>
+          <h1 className="text-5xl md:text-6xl font-bold text-ink tracking-tight mb-6">
+            All <span className="text-primary">Projects</span>
           </h1>
           <p className="text-gray-500 max-w-2xl mx-auto mb-10">
             Explore our complete catalog of digital innovations, sorted by expertise.
@@ -63,10 +63,10 @@ export default function PortfolioShowcase() {
                   key={category}
                   onClick={() => setActiveCategory(category)}
                   className={cn(
-                    "px-6 py-3 rounded-full text-xs font-extrabold tracking-[0.10em] whitespace-nowrap transition-all duration-300",
+                    "px-6 py-3 rounded-full text-xs font-bold tracking-wide whitespace-nowrap transition-all duration-300",
                     activeCategory === category
-                      ? "bg-[#0053f1] text-white shadow-md"
-                      : "text-gray-500 hover:text-[#0053f1] hover:bg-gray-50"
+                      ? "bg-primary text-white shadow-md"
+                      : "text-gray-500 hover:text-primary hover:bg-gray-50"
                   )}
                 >
                   {category}
@@ -79,37 +79,37 @@ export default function PortfolioShowcase() {
         {/* Content Area */}
         {isLoading ? (
           <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0053f1]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
           </div>
         ) : filteredPortfolios.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-[16px] border border-gray-100">
-            <p className="text-gray-400">Belum ada proyek di kategori ini.</p>
+            <p className="text-gray-400">No projects in this category yet.</p>
           </div>
         ) : (
           <div className="space-y-12">
             {filteredPortfolios.map((item) => (
               /* Card Wrapper (Latar Krem & Border) */
-              <div key={item.id} className="bg-[#FCFBF6] border border-[#EAE5D9] rounded-[24px] p-6 md:p-8 flex flex-col lg:flex-row gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div key={item.id} className="bg-background border border-line rounded-[24px] p-6 md:p-8 flex flex-col lg:flex-row gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
                 
                 {/* Bagian Kiri (Teks & Fitur) */}
                 <div className="w-full lg:w-1/3 flex flex-col justify-between space-y-8">
                   <div>
                     {/* Header Card (Tahun & Judul menyamping) */}
                     <div className="flex items-center gap-4 mb-8">
-                      <span className="bg-[#423E3A] text-white px-5 py-2 rounded-full text-sm font-bold">
+                      <span className="bg-ink text-white px-5 py-2 rounded-full text-sm font-bold">
                         {item.year || "2026"}
                       </span>
-                      <h3 className="text-2xl font-bold text-[#423E3A]">{item.title}</h3>
+                      <h3 className="text-2xl font-bold text-ink">{item.title}</h3>
                     </div>
                     
                     {/* List Fitur dengan Checklist Biru */}
                     <ul className="space-y-4">
                       {item.features && item.features.map((feature: string, idx: number) => (
                         <li key={idx} className="flex items-center gap-3">
-                          <div className="w-5 h-5 rounded-full bg-[#0053f1] flex items-center justify-center flex-shrink-0">
+                          <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                           </div>
-                          <span className="text-[#423E3A] font-medium text-sm">{feature}</span>
+                          <span className="text-ink font-medium text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -117,7 +117,7 @@ export default function PortfolioShowcase() {
 
                   {/* Kategori Pill di bagian bawah */}
                   <div>
-                    <span className="inline-flex bg-[#0053f1] text-white px-6 py-3 rounded-full text-xs font-extrabold uppercase tracking-widest shadow-md shadow-[#0053f1]/20">
+                    <span className="inline-flex bg-primary text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-md shadow-primary/20">
                       {item.category}
                     </span>
                   </div>

@@ -1,7 +1,9 @@
+import { FORMSUBMIT_ACTION } from "@/lib/site";
+
 export default function CTA() {
   return (
     <section id="contact" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 mb-20">
-      <div className="relative bg-[#0053f1] rounded-[16px] overflow-hidden px-8 py-16 md:p-16 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-12">
+      <div data-blue-section className="relative bg-primary rounded-[16px] overflow-hidden px-8 py-16 md:p-16 lg:p-20 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-12">
         
         {/* Latar Belakang Dekoratif */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/3 -translate-y-1/2 blur-[80px]"></div>
@@ -28,7 +30,7 @@ export default function CTA() {
           
           {/* PERBAIKAN: Form Layout Responsive */}
           <form 
-            action="https://formsubmit.co/stackplustudio@gmail.com" 
+            action={FORMSUBMIT_ACTION} 
             method="POST" 
             className="flex flex-col sm:flex-row items-stretch sm:items-center bg-white rounded-2xl sm:rounded-full p-2 w-full shadow-lg gap-2 sm:gap-0"
           >
@@ -51,7 +53,7 @@ export default function CTA() {
             
             <button 
               type="submit" 
-              className="bg-[#0053f1] text-white w-full sm:w-auto px-8 py-3.5 rounded-xl sm:rounded-full text-xs font-bold hover:bg-[#003cb3] transition-all whitespace-nowrap"
+              className="bg-primary text-white w-full sm:w-auto px-8 py-3.5 rounded-xl sm:rounded-full text-xs font-bold hover:bg-primary-dark transition-all whitespace-nowrap"
             >
               CONTACT US
             </button>

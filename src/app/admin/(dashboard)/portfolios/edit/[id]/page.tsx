@@ -141,10 +141,10 @@ export default function EditPortfolioPage() {
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-4xl pb-20">
       <div className="mb-8 flex justify-between items-end">
         <div>
-          <Link href="/admin/portfolios" className="text-[#0053f1] text-xs font-bold mb-4 inline-block hover:underline">
+          <Link href="/admin/portfolios" className="text-primary text-xs font-bold mb-4 inline-block hover:underline">
             ← BACK TO LIST
           </Link>
-          <h1 className="text-4xl font-bold text-[#423E3A]">Edit Project</h1>
+          <h1 className="text-4xl font-bold text-ink">Edit Project</h1>
         </div>
         <button 
           onClick={handleDelete}
@@ -159,7 +159,7 @@ export default function EditPortfolioPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-bold">Project Title</label>
-            <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} className="px-4 py-3 rounded-[16px] border border-gray-200 focus:border-[#0053f1] outline-none text-sm" />
+            <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} className="px-4 py-3 rounded-[16px] border border-gray-200 focus:border-primary outline-none text-sm" />
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-sm font-bold">Category</label>
@@ -207,7 +207,7 @@ export default function EditPortfolioPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#0053f1] text-white py-4 rounded-[16px] font-bold hover:bg-[#003cb3] disabled:bg-gray-400 transition-all shadow-lg"
+            className="w-full bg-primary text-white py-4 rounded-[16px] font-bold hover:bg-primary-dark disabled:bg-gray-400 transition-all shadow-lg"
           >
             {isLoading ? "Saving Changes..." : "UPDATE PROJECT"}
           </button>

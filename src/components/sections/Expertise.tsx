@@ -34,7 +34,7 @@ export default function Expertise() {
           <p className="text-gray-500 text-sm mb-6 leading-relaxed">
             We offer a comprehensive range of services to cover every aspect of your digital journey, from initial strategy to final launch.
           </p>
-          <Link href="#contact" className="inline-flex items-center bg-[#423E3A] text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-[#2A2724] transition-all gap-2">
+          <Link href="#contact" className="inline-flex items-center bg-ink text-white px-6 py-2.5 rounded-full text-xs font-bold hover:bg-ink-dark transition-all gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
             Book a Call
           </Link>
@@ -46,11 +46,12 @@ export default function Expertise() {
         {expertiseData.map((item, index) => (
           <div 
             key={index}
+            data-blue-section={item.isActive ? true : undefined}
             className={cn(
               "p-8 rounded-2xl flex flex-col justify-between h-[280px] transition-all duration-300",
               item.isActive 
                 ? "bg-primary text-white shadow-xl shadow-primary/20" 
-                : "bg-[#F8F6F0] text-gray-900 hover:bg-[#F0EBE0]"
+                : "bg-surface-alt text-gray-900 hover:bg-[#F0EBE0]"
             )}
           >
             {/* Ikon Dinamis yang sudah diganti */}

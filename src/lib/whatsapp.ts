@@ -1,8 +1,12 @@
-// src/lib/whatsapp.ts
+// Satu-satunya tempat membuat tautan WhatsApp.
+// Nomor dibaca dari NEXT_PUBLIC_WHATSAPP_NUMBER (format internasional tanpa +, awali 62).
+const DEFAULT_WHATSAPP_NUMBER = "6285769042975";
+
+export const WHATSAPP_NUMBER = (
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? DEFAULT_WHATSAPP_NUMBER
+).replace(/\D/g, "");
 
 export const getWhatsAppLink = (planName: string, serviceType: string) => {
-  const phoneNumber = "6281398410264"; // GANTI: Pakai nomor WA StackPlus (awali angka 62)
-  const message = `Halo StackPlus Studio! Saya tertarik dengan layanan *${serviceType}* khususnya paket *${planName}*. Bisa bantu informasi lebih lanjut?`;
-  
-  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const message = `Hello StackPlus Studio! I'd like to discuss your *${serviceType}* service, specifically the *${planName}* package. Could you share more information?`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 };

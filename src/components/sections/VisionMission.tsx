@@ -13,9 +13,9 @@ export default function VisionMission() {
             <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">
               › VISION & MISSION ‹
             </p>
-            <h2 className="text-5xl md:text-6xl font-medium text-[#423E3A] leading-[1.1] tracking-tight">
-              Driving <span className="text-[#0053f1] font-bold">Vision</span><br />
-              Delivering <span className="text-[#0053f1] font-bold">Mission</span>
+            <h2 className="text-5xl md:text-6xl font-medium text-ink leading-[1.1] tracking-tight">
+              Driving <span className="text-primary font-bold">Vision</span><br />
+              Delivering <span className="text-primary font-bold">Mission</span>
             </h2>
           </div>
 
@@ -23,7 +23,7 @@ export default function VisionMission() {
           <div className="flex flex-col gap-6">
             
             {/* Vision Card */}
-            <div className="bg-[#FDFBF7] border border-[#EAE5D9] rounded-2xl p-8 shadow-sm">
+            <div className="bg-surface border border-line rounded-2xl p-8 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Vision</h3>
               <div className="flex items-start gap-3">
                 <div className="mt-0.5 flex-shrink-0">
@@ -39,7 +39,7 @@ export default function VisionMission() {
             </div>
 
             {/* Mission Card */}
-            <div className="bg-[#FDFBF7] border border-[#EAE5D9] rounded-2xl p-8 shadow-sm">
+            <div className="bg-surface border border-line rounded-2xl p-8 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Mission</h3>
               <ul className="space-y-4">
                 {[

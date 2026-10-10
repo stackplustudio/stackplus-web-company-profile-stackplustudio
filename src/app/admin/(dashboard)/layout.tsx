@@ -48,14 +48,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center">
-         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0053f1]"></div>
+      <div className="min-h-screen bg-surface flex items-center justify-center">
+         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] flex flex-col font-sans">
+    <div className="min-h-screen bg-surface flex flex-col font-sans">
       
       {/* TOP NAVBAR ADMIN */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
@@ -64,12 +64,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             
             <div className="flex-shrink-0 flex items-center gap-4">
               <Link href="/admin" className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[#0053f1] text-white flex items-center justify-center font-black text-xl">
+                <div className="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-extrabold text-xl">
                   S
                 </div>
                 <div>
-                  <h2 className="text-xl font-black text-[#423E3A] tracking-tighter leading-none">
-                    Stack<span className="text-[#0053f1]">Admin</span>
+                  <h2 className="text-xl font-extrabold text-ink tracking-tighter leading-none">
+                    Stack<span className="text-primary">Admin</span>
                   </h2>
                   <p className="text-[9px] uppercase tracking-widest text-gray-400 font-bold mt-1">
                     Management Panel
@@ -78,7 +78,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               </Link>
             </div>
 
-            <nav className="hidden md:flex items-center gap-2 bg-[#FDFBF7] border border-gray-100 px-2 py-1.5 rounded-full">
+            <nav className="hidden md:flex items-center gap-2 bg-surface border border-gray-100 px-2 py-1.5 rounded-full">
               {menuItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
@@ -87,8 +87,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                     href={item.href}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
                       isActive
-                        ? "bg-[#0053f1] text-white shadow-md shadow-[#0053f1]/20"
-                        : "text-gray-500 hover:text-[#423E3A] hover:bg-white"
+                        ? "bg-primary text-white shadow-md shadow-primary/20"
+                        : "text-gray-500 hover:text-ink hover:bg-white"
                     }`}
                   >
                     <span>{item.icon}</span>
@@ -100,10 +100,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
             <div className="hidden md:flex items-center gap-4">
               <div className="flex items-center gap-2 bg-gray-50 border border-gray-100 pl-1 pr-3 py-1 rounded-full">
-                <div className="w-7 h-7 rounded-full bg-[#0053f1]/10 flex items-center justify-center text-[#0053f1] font-black text-xs">
+                <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-primary font-extrabold text-xs">
                   S
                 </div>
-                <span className="text-xs font-bold text-[#423E3A]">StackPlustudio</span>
+                <span className="text-xs font-bold text-ink">StackPlustudio</span>
               </div>
               
               <div className="h-6 w-px bg-gray-200"></div>
@@ -119,7 +119,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <div className="md:hidden flex items-center">
               <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-gray-600 hover:text-[#0053f1] p-2 bg-gray-50 rounded-lg"
+                className="text-gray-600 hover:text-primary p-2 bg-gray-50 rounded-lg"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -142,8 +142,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl text-[13px] font-bold transition-all ${
                       isActive
-                        ? "bg-[#0053f1] text-white shadow-md"
-                        : "text-gray-500 bg-gray-50 hover:text-[#423E3A]"
+                        ? "bg-primary text-white shadow-md"
+                        : "text-gray-500 bg-gray-50 hover:text-ink"
                     }`}
                   >
                     <span className="text-lg">{item.icon}</span>

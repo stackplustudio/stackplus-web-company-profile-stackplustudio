@@ -10,7 +10,7 @@ export const sendChatRequest = async (message: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Gagal menghubungi AI Service");
+    throw new Error("Could not reach the AI service");
   }
 
   return response.json(); // Mengembalikan { response: "...", strategy: "..." }
