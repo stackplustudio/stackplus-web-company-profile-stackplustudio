@@ -5,6 +5,8 @@ import Portfolio from "@/components/sections/Portfolio";
 import WhyUs from "@/components/sections/WhyUs";
 import CTA from "@/components/sections/CTA";
 
+export const revalidate = 60;
+
 export default function Home() {
   return (
     <>

@@ -1,134 +1,90 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { Pencil, Plus } from "lucide-react";
+import { db } from "@/lib/db";
+import { deleteService } from "@/app/admin/actions";
+import { SERVICE_TYPES, isServiceType, serviceTypeLabel } from "@/lib/categories";
+import { buttonStyles } from "@/components/ui/Button";
+import DeleteButton from "@/components/admin/DeleteButton";
+import { EmptyState, PageHeader, StatusBadge } from "@/components/admin/ui";
+import { cn } from "@/lib/utils";
 
-export default function ServicesAdminPage() {
-  const [services, setServices] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export const dynamic = "force-dynamic";
 
-  // Fungsi memanggil data services dari database
-  const fetchServices = async () => {
-    try {
-      setIsLoading(true);
-      const { data, error } = await supabase
-        .from("services_pricing")
-        .select("*")
-        .order("created_at", { ascending: false });
+export default async function ServicesPage({ searchParams }: { searchParams: Promise<{ type?: string }> }) {
+  const { type } = await searchParams;
+  const active = isServiceType(type) ? type : undefined;
 
-      if (error) throw error;
-      if (data) setServices(data);
-    } catch (error) {
-      console.error("Error fetching services:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const [packages, counts] = await Promise.all([
+    db.servicePricing.findMany({
+      where: active ? { serviceType: active } : undefined,
+      orderBy: [{ serviceType: "asc" }, { category: "asc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
+    }),
+    db.servicePricing.groupBy({ by: ["serviceType"], _count: { _all: true } }),
+  ]);
+  const countOf = (value: string) => counts.find((c) => c.serviceType === value)?._count._all ?? 0;
+  const totalCount = counts.reduce((sum, c) => sum + c._count._all, 0);
 
-  useEffect(() => {
-    fetchServices();
-  }, []);
+  const tabs = [{ value: "", label: "All", count: totalCount }, ...SERVICE_TYPES.map((s) => ({ value: s.value, label: s.label, count: countOf(s.value) }))];
 
-  // Fungsi untuk menghapus data service
-  const handleDelete = async (id: string, name: string, category: string) => {
-    const isConfirmed = window.confirm(`Yakin ingin menghapus paket "${name}" dari kategori "${category}"? Data yang dihapus tidak bisa dikembalikan.`);
-    
-    if (!isConfirmed) return;
-
-    try {
-      const { error } = await supabase
-        .from("services_pricing")
-        .delete()
-        .eq("id", id);
-
-      if (error) throw error;
-
-      // Update UI langsung
-      setServices(services.filter((item) => item.id !== id));
-      alert("Paket layanan berhasil dihapus! 🗑️");
-      
-    } catch (error) {
-      console.error("Error deleting service:", error);
-      alert("Gagal menghapus layanan.");
-    }
-  };
+  const create = (
+    <Link href="/admin/services/create" className={buttonStyles("primary", "md")}>
+      <Plus size={16} aria-hidden /> New package
+    </Link>
+  );
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <div>
-          <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-2">› MANAGEMENT ‹</p>
-          <h1 className="text-4xl font-bold text-ink tracking-tight">Services & Pricing</h1>
-        </div>
-        <Link 
-          href="/admin/services/create" 
-          className="bg-primary text-white px-6 py-3 rounded-[16px] text-sm font-bold hover:bg-primary-dark transition-colors shadow-md shadow-primary/20 flex items-center gap-2"
-        >
-          <span className="text-lg">+</span> Add New Package
-        </Link>
-      </div>
+    <>
+      <PageHeader title="Services & Pricing" description="Packages shown on the five service pages." actions={create} />
 
-      {/* Table Section */}
-      <div className="bg-white border border-gray-100 rounded-[16px] shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-surface border-b border-gray-100">
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Service Type</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Category</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Package Name</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading ? (
-                <tr>
-                  <td colSpan={4} className="py-8 px-6 text-center text-gray-400 text-sm">
-                    Memuat data dari database...
-                  </td>
-                </tr>
-              ) : services.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="py-8 px-6 text-center text-gray-400 text-sm">
-                    Belum ada data paket layanan. Silakan tambah paket baru!
-                  </td>
-                </tr>
-              ) : (
-                services.map((item) => (
-                  <tr key={item.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-6 font-medium text-ink">{item.service_type}</td>
-                    <td className="py-4 px-6 text-sm text-gray-500">{item.category}</td>
-                    <td className="py-4 px-6">
-                      <span className={`px-3 py-1 rounded-[16px] text-xs font-bold ${
-                        item.is_pro ? 'bg-primary/10 text-primary' : 'bg-line/30 text-ink'
-                      }`}>
-                        {item.name} {item.is_pro && '✨'}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-right">
-                      <div className="flex justify-end gap-2">
-                        {/* Tombol Edit untuk tahap selanjutnya */}
-                        <Link href={`/admin/services/edit/${item.id}`} className="text-gray-400 hover:text-primary transition-colors text-sm font-medium px-2 py-1">
-                          Edit
-                        </Link>
-                        {/* Tombol Delete yang sudah berfungsi */}
-                        <button 
-                          onClick={() => handleDelete(item.id, item.name, item.category)} 
-                          className="text-gray-400 hover:text-red-500 transition-colors text-sm font-medium px-2 py-1"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+      <nav aria-label="Service filter" className="hide-scrollbar mb-6 flex gap-2 overflow-x-auto pb-1">
+        {tabs.map((tab) => {
+          const isActive = (active ?? "") === tab.value;
+          return (
+            <Link
+              key={tab.value || "all"}
+              href={tab.value ? `/admin/services?type=${tab.value}` : "/admin/services"}
+              aria-current={isActive ? "page" : undefined}
+              className={cn(
+                "whitespace-nowrap rounded-full border px-4 py-2 text-xs font-bold transition",
+                isActive ? "border-primary bg-primary text-white" : "border-line bg-surface text-ink hover:border-primary/40 hover:text-primary"
               )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+            >
+              {tab.label} <span className={isActive ? "text-white/80" : "text-ink/50"}>{tab.count}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
+      {packages.length === 0 ? (
+        <EmptyState title="No packages here yet" description="Add a package and it will appear on the matching service page." action={create} />
+      ) : (
+        <ul className="divide-y divide-line overflow-hidden rounded-[16px] border border-line bg-surface shadow-sm">
+          {packages.map((s) => (
+            <li key={s.id} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
+              <div className="min-w-0 flex-1">
+                <p className="flex items-center gap-2 text-sm font-bold text-ink-dark">
+                  {s.name}
+                  {s.isPro && <StatusBadge tone="blue">Recommended</StatusBadge>}
+                </p>
+                <p className="truncate text-xs text-ink/60">
+                  {serviceTypeLabel(s.serviceType)} · {s.category} · {s.benefits.length} benefit{s.benefits.length === 1 ? "" : "s"}
+                </p>
+              </div>
+              <div className="flex items-center gap-1">
+                <Link
+                  href={`/admin/services/edit/${s.id}`}
+                  aria-label={`Edit ${s.name}`}
+                  title="Edit"
+                  className="rounded-full p-2 text-ink/50 transition hover:bg-surface-alt hover:text-primary"
+                >
+                  <Pencil size={16} aria-hidden />
+                </Link>
+                <DeleteButton id={s.id} action={deleteService} label={s.name} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }

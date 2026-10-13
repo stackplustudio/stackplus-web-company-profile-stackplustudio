@@ -1,82 +1,36 @@
 "use client";
 
-import { useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { useActionState } from "react";
+import { loginAction } from "../actions";
+import { buttonStyles } from "@/components/ui/Button";
+import { Field, TextInput } from "@/components/admin/fields";
 
-export default function AdminLoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const router = useRouter();
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMsg("");
-
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) throw error;
-
-      // Jika berhasil, lempar ke dashboard admin
-      router.push("/admin");
-      router.refresh();
-    } catch (error: any) {
-      setErrorMsg("Email atau Password salah, Bud! Coba cek lagi.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+export default function LoginPage() {
+  const [state, formAction, pending] = useActionState(loginAction, undefined);
 
   return (
-    <div className="min-h-screen bg-surface flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-[24px] border border-line p-8 md:p-12 shadow-sm animate-in fade-in zoom-in duration-500">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-ink tracking-tight">
-            Stack<span className="text-primary">Admin</span>
-          </h1>
-          <p className="text-gray-400 text-sm mt-2 font-medium uppercase tracking-widest text-[10px]">› restricted area ‹</p>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-background p-4">
+      <div className="w-full max-w-sm rounded-[16px] border border-line bg-surface p-8 shadow-sm">
+        <div className="mb-8 text-center">
+          <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-[12px] bg-primary text-base font-bold text-white">S+</span>
+          <h1 className="text-2xl font-bold tracking-tight text-ink-dark">Admin sign in</h1>
+          <p className="mt-1 text-sm text-ink/60">StackPlus Studio</p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-ink">Admin Email</label>
-            <input
-              type="email" required value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-4 rounded-[16px] border border-gray-100 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all text-sm"
-              placeholder="budi@stackplus.studio"
-            />
-          </div>
+        <form action={formAction} className="space-y-5">
+          <Field label="Email" htmlFor="email">
+            <TextInput id="email" name="email" type="email" autoComplete="username" required />
+          </Field>
+          <Field label="Password" htmlFor="password">
+            <TextInput id="password" name="password" type="password" autoComplete="current-password" required />
+          </Field>
 
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-ink">Password</label>
-            <input
-              type="password" required value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-4 rounded-[16px] border border-gray-100 focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all text-sm"
-              placeholder="••••••••"
-            />
-          </div>
-
-          {errorMsg && (
-            <p className="text-red-500 text-xs font-bold bg-red-50 p-3 rounded-[12px] text-center">
-              {errorMsg}
-            </p>
+          {state?.error && (
+            <p role="alert" className="rounded-[12px] bg-red-50 p-3 text-center text-xs font-bold text-red-600">{state.error}</p>
           )}
 
-          <button
-            type="submit" disabled={isLoading}
-            className="w-full bg-ink text-white py-4 rounded-[16px] font-bold hover:bg-primary transition-all duration-300 shadow-lg shadow-ink/10 disabled:bg-gray-300"
-          >
-            {isLoading ? "Authenticating..." : "LOGIN TO DASHBOARD"}
+          <button type="submit" disabled={pending} className={buttonStyles("primary", "lg", "w-full")}>
+            {pending ? "Signing in…" : "Sign in"}
           </button>
         </form>
       </div>

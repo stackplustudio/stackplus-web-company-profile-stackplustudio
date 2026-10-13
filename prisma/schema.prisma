@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PortfolioCategory {
+  UI_UX
+  WEB
+  APPS
+  AI_CHATBOT
+  BRANDING
+}
+
+enum ServiceType {
+  WEB_DEVELOPMENT
+  MOBILE_DEVELOPMENT
+  AI_CHATBOT
+  BRANDING
+  UI_UX_DESIGN
+}
+
+model Portfolio {
+  id        String            @id @default(cuid())
+  slug      String            @unique
+  title     String
+  category  PortfolioCategory
+  year      String
+  summary   String            @default("")
+  role      String?
+  problem   String?
+  solution  String?
+  results   String?
+  metric    String?
+  features  String[]
+  techStack String[]
+  images    String[]          // maks 4, landscape; index 0 = preview kartu
+  demoUrl   String?
+  featured  Boolean           @default(false)
+  sortOrder Int               @default(0)
+  published Boolean           @default(true)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([category, published])
+  @@index([published, featured, sortOrder])
+  @@map("portfolios")
+}
+
+model ServicePricing {
+  id          String      @id @default(cuid())
+  serviceType ServiceType
+  category    String
+  name        String
+  description String      @default("")
+  isPro       Boolean     @default(false)
+  benefits    String[]
+  codeTypes   String[]
+  techTools   String[]
+  sortOrder   Int         @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([serviceType, category])
+  @@map("services_pricing")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  @@map("admin_users")
+}

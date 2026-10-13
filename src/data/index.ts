@@ -1,3 +1,12 @@
+export type PricingPlan = {
+  name: string;
+  desc: string;
+  benefits: string[];
+  codeTypes?: string[];
+  techTools?: string[];
+  isPro: boolean;
+};
+
 // --- DATA NAVBAR ---
 export const navLinks = [
   { name: "HOME", href: "/" },
@@ -86,7 +95,7 @@ export const portfolioData = [
 export const teamData = [
   { 
     name: "Zauzan Adzani", 
-    role: "UI/UX DESIGNER", 
+    role: "PROJECT MANAGER", 
     image: "/images/zauzan.png", // <-- Koma ini yang tadi hilang
     instagram: "https://www.instagram.com/zauzandz_/", 
     linkedin: "https://www.linkedin.com/in/zauzandz/"   
@@ -114,14 +123,14 @@ export const teamData = [
   },
   { 
     name: "Rafael Kristanto", 
-    role: "PRODUCT DEVELOPMENT", 
+    role: "AI ENGINEER", 
     image: "/images/rafael.jpeg",
     instagram: "https://www.instagram.com/rafaelaktbn/",
-    linkedin: "https://linkedin.com/in/rafael"
+    linkedin: "https://www.linkedin.com/in/rafael-asi-kristanto-tambunan/"
   },
   { 
     name: "Arief Rachman", 
-    role: "SOCIAL MEDIA SPESIALIST", 
+    role: "SOCIAL MEDIA SPECIALIST", 
     image: "/images/arief.jpeg",
     instagram: "https://www.instagram.com/ariefrachh/",
     linkedin: "https://www.linkedin.com/in/arief-rachman25/"
@@ -192,7 +201,7 @@ const baseWebDevPlans = [
 ];
 
 // Data lengkap per kategori tab
-export const webDevPricingData: Record<string, any[]> = {
+export const webDevPricingData: Record<string, PricingPlan[]> = {
   "GENERAL": [
     { name: "Lite", desc: "For solo creators or small teams launching their first site.", benefits: ["Free Domain (.com, .co.id, .id)", "Scope terbatas (fitur/halaman dasar)", "Template-based design", "Core functionality only", "Basic integration", "Basic SEO setup", "1x revisi", "Standard documentation", "Delivery cepat"], codeTypes: ["Wordpress", "Framer"], techTools: ["Hostinger", "Vercel", "Render", "Cloudflare R2"], isPro: false },
     { name: "Pro", desc: "For solo creators or small teams launching their first site.", benefits: ["Free Domain (.com, .co.id, .id)", "Scope menengah", "Semi / full custom design", "Advanced core features", "Third-party integration", "Analytics setup", "Performance improvement", "2-3x revisi", "Basic training", "Extended documentation"], codeTypes: ["Next.js", "React.js", "TailwindCSS"], techTools: ["Hostinger", "Vercel", "Render", "Cloudflare R2"], isPro: true },
@@ -346,7 +355,7 @@ const baseMobileDevPlans = [
   { name: "Custom", desc: "Enterprise-grade mobile ecosystem built from scratch.", benefits: ["Everything in Advance", "Hardware Integration (IoT/Bluetooth)", "Custom CI/CD Pipeline", "White-label Solution", "Dedicated Team", "Source Code Ownership", "24/7 SLA Support"], codeTypes: ["Any Stack (Native/Hybrid)"], techTools: ["Custom Cloud", "Docker Backend"], isPro: false }
 ];
 
-export const mobileDevPricingData: Record<string, any[]> = {
+export const mobileDevPricingData: Record<string, PricingPlan[]> = {
   "GENERAL": baseMobileDevPlans,
   "E-COMMERCE MOBILE APP": [
     { name: "Lite", desc: "Quick launch for your online store.", benefits: ["Product Catalog", "Basic Cart & Checkout", "Standard Payment Gateway", "Up to 50 Products", "1x Revisi"], codeTypes: ["Flutter"], techTools: ["Firebase", "Stripe"], isPro: false },
@@ -371,7 +380,7 @@ const baseAiChatbotPlans = [
 ];
 
 // Data Spesifik sesuai gambar
-export const aiChatbotPricingData: Record<string, any[]> = {
+export const aiChatbotPricingData: Record<string, PricingPlan[]> = {
   "GENERAL": baseAiChatbotPlans,
   "CUSTOMER SERVICE": [
     { name: "Lite", desc: "For small businesses starting with AI automation.", benefits: ["Single channel (Web / WhatsApp)", "FAQ intelligent response", "Prompt engineering basic", "Dashboard monitoring sederhana", "1 knowledge source (max 50 Q&A)", "Response template customization", "Deploy & setup", "2 weeks support"], codeTypes: ["Next.js", "Python"], techTools: ["Hostinger", "Vercel", "Render", "Cloudflare R2"], isPro: false },
@@ -397,7 +406,7 @@ export const aiChatbotLifecycleData = [
 // --- DATA PRICING BRANDING ---
 export const brandingPricingTabs = ["LOGO", "SOCIAL MEDIA DESIGN"];
 
-export const brandingPricingData: Record<string, any[]> = {
+export const brandingPricingData: Record<string, PricingPlan[]> = {
   "LOGO": [
     { 
       name: "Launch", 

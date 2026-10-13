@@ -16,43 +16,33 @@ const jakartaSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "StackPlus Studio | Custom Web Development & Agentic AI Solutions",
-  description: "StackPlus Studio is a premium digital agency specializing in high-performance web development, intuitive UI/UX design, and advanced AI agent integration.",
-  keywords: [
-    "Web Development Services", 
-    "Software House Indonesia", 
-    "AI Engineering Agency", 
-    "Custom AI Chatbot Development", 
-    "UI/UX Design Studio", 
-    "StackPlus Studio"
-  ],
-  authors: [{ name: "StackPlus Studio" }],
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: "StackPlus Studio | Web Development, Mobile Apps & AI Chatbot Agency",
+    template: "%s | StackPlus Studio",
+  },
+  description:
+    "StackPlus Studio is a digital agency building custom websites, mobile apps, AI chatbots, UI/UX design and branding for growing businesses.",
+  applicationName: SITE.name,
+  keywords: ["StackPlus Studio", "StackPlus", "web development agency", "software house Indonesia", "AI chatbot development", "mobile app development", "UI/UX design studio"],
+  authors: [{ name: SITE.name, url: SITE.url }],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "StackPlus Studio | Building Digital Excellence",
-    description: "Turning ideas into actionable digital solutions. Expert in UI/UX, Web Dev, and Agentic AI.",
-    url: "https://stackplustudio.com", 
-    siteName: "StackPlus Studio",
-    images: [
-      {
-        url: "/icons/logo4.png",
-        width: 1200,
-        height: 630,
-        alt: "StackPlus Studio Digital Solutions",
-      },
-    ],
+    description: "Turning ideas into digital products. Web development, mobile apps, AI chatbots, UI/UX and branding.",
+    url: "/",
+    siteName: SITE.name,
+    images: [{ url: "/icons/logo4.png", width: 1200, height: 630, alt: "StackPlus Studio" }],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "StackPlus Studio | Digital Solutions",
-    description: "Custom Web Development & AI Engineering.",
+    description: "Custom web development, mobile apps and AI chatbots.",
     images: ["/icons/logo4.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -61,20 +51,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   // Data JSON-LD untuk SEO Organisasi
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "StackPlus Studio",
-    "url": "https://stackplustudio.com",
-    "logo": "https://stackplustudio.com/icons/logo4.png",
-    "sameAs": [SITE.social.instagram, SITE.social.tiktok, SITE.social.linkedin],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": SITE.email,
-      "contactType": "customer service"
+    const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.name,
+      alternateName: ["StackPlus", "Stack Plus Studio"],
+      url: SITE.url,
+      logo: `${SITE.url}/icons/logo4.png`,
+      sameAs: [SITE.social.instagram, SITE.social.tiktok, SITE.social.linkedin],
+      contactPoint: [
+        { "@type": "ContactPoint", email: SITE.email, telephone: "+6285769042975", contactType: "customer service" },
+      ],
+      description: "Digital agency for web development, mobile apps, AI chatbots, UI/UX design and branding.",
     },
-    "description": "Premium digital agency specializing in high-performance web development and advanced AI agent integration."
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      name: SITE.name,
+      alternateName: "StackPlus",
+      url: SITE.url,
+      publisher: { "@id": `${SITE.url}/#organization` },
+    },
+  ];
 
   return (
     <html lang="en" className={`${jakartaSans.variable} scroll-smooth`}>

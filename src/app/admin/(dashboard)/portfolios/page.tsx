@@ -1,135 +1,83 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { ExternalLink, Pencil, Plus, Star } from "lucide-react";
+import { db } from "@/lib/db";
+import { deletePortfolio } from "@/app/admin/actions";
+import { portfolioCategoryLabel } from "@/lib/categories";
+import { buttonStyles } from "@/components/ui/Button";
+import DeleteButton from "@/components/admin/DeleteButton";
+import { EmptyState, PageHeader, StatusBadge } from "@/components/admin/ui";
 
-export default function PortfoliosAdminPage() {
-  const [portfolios, setPortfolios] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export const dynamic = "force-dynamic";
 
-  // Fungsi untuk mengambil data dari Supabase
-  const fetchPortfolios = async () => {
-    try {
-      setIsLoading(true);
-      const { data, error } = await supabase
-        .from("portfolios")
-        .select("*")
-        .order("created_at", { ascending: false });
+export default async function PortfoliosPage() {
+  const projects = await db.portfolio.findMany({
+    orderBy: [{ featured: "desc" }, { sortOrder: "asc" }, { createdAt: "desc" }],
+  });
 
-      if (error) throw error;
-      if (data) setPortfolios(data);
-    } catch (error) {
-      console.error("Error fetching portfolios:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Panggil fungsi saat halaman pertama kali dibuka
-  useEffect(() => {
-    fetchPortfolios();
-  }, []);
-
-  // FUNGSI BARU: Untuk menghapus data
-  const handleDelete = async (id: string, title: string) => {
-    // 1. Munculkan pop-up konfirmasi
-    const isConfirmed = window.confirm(`Apakah Anda yakin ingin menghapus proyek "${title}"? Data yang dihapus tidak dapat dikembalikan.`);
-    
-    if (!isConfirmed) return; // Kalau user klik Cancel, batalkan proses
-
-    try {
-      // 2. Hapus data dari Supabase berdasarkan ID
-      const { error } = await supabase
-        .from("portfolios")
-        .delete()
-        .eq("id", id);
-
-      if (error) throw error;
-
-      // 3. Update tampilan tabel secara instan (tanpa perlu refresh web)
-      setPortfolios(portfolios.filter((item) => item.id !== id));
-      alert("Proyek berhasil dihapus! 🗑️");
-      
-    } catch (error) {
-      console.error("Error deleting portfolio:", error);
-      alert("Gagal menghapus proyek. Cek konsol untuk detailnya.");
-    }
-  };
+  const create = (
+    <Link href="/admin/portfolios/create" className={buttonStyles("primary", "md")}>
+      <Plus size={16} aria-hidden /> New project
+    </Link>
+  );
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <div>
-          <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-2">› MANAGEMENT ‹</p>
-          <h1 className="text-4xl font-bold text-ink tracking-tight">Portfolios</h1>
-        </div>
-        <Link 
-          href="/admin/portfolios/create" 
-          className="bg-primary text-white px-6 py-3 rounded-[16px] text-sm font-bold hover:bg-primary-dark transition-colors shadow-md shadow-primary/20 flex items-center gap-2"
-        >
-          <span className="text-lg">+</span> Add New Project
-        </Link>
-      </div>
+    <>
+      <PageHeader title="Portfolio" description={`${projects.length} project${projects.length === 1 ? "" : "s"}`} actions={create} />
 
-      {/* Table Section */}
-      <div className="bg-white border border-gray-100 rounded-[16px] shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-surface border-b border-gray-100">
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Project Name</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Category</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Year</th>
-                <th className="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading ? (
-                <tr>
-                  <td colSpan={4} className="py-8 px-6 text-center text-gray-400 text-sm">
-                    Memuat data dari database...
-                  </td>
-                </tr>
-              ) : portfolios.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="py-8 px-6 text-center text-gray-400 text-sm">
-                    Belum ada data portofolio. Silakan tambah proyek baru!
-                  </td>
-                </tr>
-              ) : (
-                portfolios.map((item) => (
-                  <tr key={item.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-6 font-medium text-ink">{item.title}</td>
-                    <td className="py-4 px-6">
-                      <span className="bg-line/30 text-ink px-3 py-1 rounded-[16px] text-xs font-bold">
-                        {item.category}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-gray-500 text-sm">{item.year}</td>
-                    <td className="py-4 px-6 text-right">
-                      <div className="flex justify-end gap-2">
-                        {/* Tombol Edit (Kita siapkan link-nya untuk nanti) */}
-                        <Link href={`/admin/portfolios/edit/${item.id}`} className="text-gray-400 hover:text-primary transition-colors text-sm font-medium px-2 py-1">
-                          Edit
-                        </Link>
-                        {/* Tombol Delete yang sudah nyala */}
-                        <button 
-                          onClick={() => handleDelete(item.id, item.title)} 
-                          className="text-gray-400 hover:text-red-500 transition-colors text-sm font-medium px-2 py-1"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+      {projects.length === 0 ? (
+        <EmptyState title="No projects yet" description="Create your first project to show it on the website." action={create} />
+      ) : (
+        <ul className="divide-y divide-line overflow-hidden rounded-[16px] border border-line bg-surface shadow-sm">
+          {projects.map((p) => (
+            <li key={p.id} className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center">
+              <div className="flex min-w-0 flex-1 items-center gap-4">
+                <span className="h-14 w-24 flex-shrink-0 overflow-hidden rounded-[8px] border border-line bg-surface-alt">
+                  {p.images[0] && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.images[0]} alt="" className="h-full w-full object-cover" />
+                  )}
+                </span>
+                <div className="min-w-0">
+                  <p className="flex items-center gap-2 truncate text-sm font-bold text-ink-dark">
+                    {p.title}
+                    {p.featured && <Star size={14} className="flex-shrink-0 fill-primary text-primary" aria-label="Featured" />}
+                  </p>
+                  <p className="truncate text-xs text-ink/60">
+                    {portfolioCategoryLabel(p.category)} · {p.year} · /{p.slug}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between gap-4 sm:justify-end">
+                <StatusBadge tone={p.published ? "green" : "gray"}>{p.published ? "Published" : "Draft"}</StatusBadge>
+                <div className="flex items-center gap-1">
+                  {p.published && (
+                    <a
+                      href={`/portfolio/${p.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${p.title} on the website`}
+                      title="View on website"
+                      className="rounded-full p-2 text-ink/50 transition hover:bg-surface-alt hover:text-primary"
+                    >
+                      <ExternalLink size={16} aria-hidden />
+                    </a>
+                  )}
+                  <Link
+                    href={`/admin/portfolios/edit/${p.id}`}
+                    aria-label={`Edit ${p.title}`}
+                    title="Edit"
+                    className="rounded-full p-2 text-ink/50 transition hover:bg-surface-alt hover:text-primary"
+                  >
+                    <Pencil size={16} aria-hidden />
+                  </Link>
+                  <DeleteButton id={p.id} action={deletePortfolio} label={p.title} />
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
