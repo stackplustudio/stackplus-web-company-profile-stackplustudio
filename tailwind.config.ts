@@ -32,13 +32,23 @@ const config: Config = {
         },
       },
       keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-100%)" },
+        "marquee-x": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-x-reverse": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
         },
       },
       animation: {
-        marquee: "marquee 20s linear infinite",
+        "marquee-x": "marquee-x 40s linear infinite",
+        "marquee-x-reverse": "marquee-x-reverse 40s linear infinite",
+        float: "float 6s ease-in-out infinite",
       },
     },
   },
@@ -46,7 +56,7 @@ const config: Config = {
     // Menyediakan kelas animate-in, fade-in, slide-in-from-*, zoom-in yang dipakai di banyak komponen
     animate,
     // Utility yang sebelumnya dipakai tetapi belum pernah didefinisikan
-    plugin(({ addUtilities }) => {
+    plugin(({ addUtilities, addComponents }) => {
       addUtilities({
         ".hide-scrollbar": {
           "-ms-overflow-style": "none",
@@ -54,6 +64,16 @@ const config: Config = {
         },
         ".hide-scrollbar::-webkit-scrollbar": {
           display: "none",
+        },
+      });
+      addComponents({
+        ".card-hover": {
+          transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow: "0 16px 32px -12px rgb(0 83 241 / 0.2)",
+            borderColor: "rgb(0 83 241 / 0.3)",
+          },
         },
       });
     }),

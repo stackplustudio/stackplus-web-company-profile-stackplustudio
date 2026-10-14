@@ -1,30 +1,15 @@
-import { expertiseData } from "@/data";
 import Link from "next/link";
-import { ArrowRight, Layout, Code, Smartphone, Bot, Palette } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-// Fungsi pintar untuk memilih ikon berdasarkan judul layanan
-const getIcon = (title: string) => {
-  switch (title) {
-    case "UI/UX Design": return <Layout size={24} />;
-    case "Web Development": return <Code size={24} />;
-    case "Mobile Development": return <Smartphone size={24} />;
-    case "AI ChatBot": return <Bot size={24} />;
-    case "Branding Design": return <Palette size={24} />;
-    default: return <Layout size={24} />;
-  }
-};
+import { expertiseData } from "@/data";
+import Reveal from "@/components/ui/Reveal";
+import ServiceCard from "@/components/ui/ServiceCard";
 
 export default function Expertise() {
   return (
     <section id="service" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
         <div className="max-w-md">
-          <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">
-            › EXPERTISE ‹
-          </p>
+          <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">› EXPERTISE ‹</p>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
             Our Expertise That <br />
             <span className="text-primary">Drives Impact</span>
@@ -44,55 +29,11 @@ export default function Expertise() {
       {/* Grid Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {expertiseData.map((item, index) => (
-          <div 
-            key={index}
-            data-blue-section={item.isActive ? true : undefined}
-            className={cn(
-              "p-8 rounded-2xl flex flex-col justify-between h-[280px] transition-all duration-300",
-              item.isActive 
-                ? "bg-primary text-white shadow-xl shadow-primary/20" 
-                : "bg-surface-alt text-gray-900 hover:bg-[#F0EBE0]"
-            )}
-          >
-            {/* Ikon Dinamis yang sudah diganti */}
-            <div className={cn(
-              "w-12 h-12 rounded-full flex items-center justify-center mb-6",
-              item.isActive ? "bg-white/20 text-white" : "bg-primary/10 text-primary"
-            )}>
-              {getIcon(item.title)}
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-              <p className={cn(
-                "text-sm mb-6 line-clamp-2",
-                item.isActive ? "text-white/80" : "text-gray-500"
-              )}>
-                {item.desc}
-              </p>
-              
-              <Link 
-                href={
-                  item.title === "Web Development" ? "/service/web-development" : 
-                  item.title === "UI/UX Design" ? "/service/ui-ux-design" : 
-                  item.title === "Mobile Development" ? "/service/mobile-development" : 
-                  item.title === "AI ChatBot" ? "/service/ai-chatbot" : 
-                  item.title === "Branding Design" ? "/service/branding-design" : 
-                  "#"
-                } 
-                className={cn(
-                  "inline-flex items-center text-sm font-bold gap-2 group",
-                  item.isActive ? "text-white" : "text-primary"
-                )}
-              >
-                Learn More 
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </div>
+          <Reveal key={item.title} delay={index * 90} className="h-full">
+            <ServiceCard title={item.title} desc={item.desc} active={item.isActive} />
+          </Reveal>
         ))}
       </div>
-      
     </section>
   );
 }

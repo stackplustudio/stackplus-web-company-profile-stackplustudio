@@ -450,3 +450,10 @@ export const whyUsData = {
   imageTwo: "/images/area_diskusi2.jpeg",  // Ganti dengan nama file Foto Tim Bekerja kamu
   // ... data lainnya seperti title atau desc jika ada
 };
+
+export const statsData = [
+  { key: "experience", label: "Experience", value: 1, suffix: "+", unit: "Years" },
+  { key: "products", label: "Products", value: 11, suffix: "", unit: "Delivered" },
+  { key: "clients", label: "Clients", value: 7, suffix: "", unit: "Happy clients" },
+  { key: "team", label: "Team", value: 6, suffix: "", unit: "Members" },
+] as const;
