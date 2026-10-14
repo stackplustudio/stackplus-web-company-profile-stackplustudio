@@ -16,23 +16,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Hormati preferensi pengguna yang mematikan animasi */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
-}
+
 
 .reveal {
   opacity: 0;
