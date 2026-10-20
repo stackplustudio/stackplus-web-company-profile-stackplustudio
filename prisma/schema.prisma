@@ -23,6 +23,11 @@ enum ServiceType {
   UI_UX_DESIGN
 }
 
+enum StatSource {
+  MANUAL
+  YEARS_SINCE_FOUNDING
+}
+
 model Portfolio {
   id        String            @id @default(cuid())
   slug      String            @unique
@@ -75,4 +80,21 @@ model AdminUser {
   createdAt    DateTime @default(now())
 
   @@map("admin_users")
+}
+
+model SiteStat {
+  id        String     @id @default(cuid())
+  label     String // judul kecil, mis. "Products"
+  unit      String     @default("") // keterangan, mis. "Delivered"
+  icon      String     @default("rocket")
+  source    StatSource @default(MANUAL)
+  value     Int        @default(0) // dipakai bila source = MANUAL
+  suffix    String     @default("") // mis. "+"
+  sortOrder Int        @default(0)
+  published Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([published, sortOrder])
+  @@map("site_stats")
 }

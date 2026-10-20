@@ -85,7 +85,7 @@ export default async function Hero() {
         </div>
 
         {/* Kanan: Portfolio Showcase */}
-        <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[460px] flex items-center justify-center mt-4 lg:mt-0">
+        <div className="relative w-full h-[360px] sm:h-[400px] lg:h-[460px] flex items-center justify-center mt-4 lg:mt-0">
           {/* Latar belakang grid & gradient glow */}
           <div className="absolute right-0 top-0 w-3/4 h-3/4 bg-surface-alt rounded-full opacity-40 blur-3xl"></div>
           <div className="absolute w-40 h-40 sm:w-64 sm:h-64 bg-primary opacity-[0.05] sm:opacity-10 rounded-full blur-2xl sm:blur-3xl animate-pulse"></div>

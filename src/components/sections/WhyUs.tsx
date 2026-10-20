@@ -296,7 +296,7 @@ function PartnershipCard() {
   const active = row % n;
 
   return (
-    <div className="lg:col-span-8 bg-surface rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
+    <div className="lg:col-span-5 bg-surface rounded-[16px] border border-gray-100 p-6 sm:p-8 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
       <h3 className="text-xl font-bold text-gray-900 mb-6">Strategic Partnership</h3>
       <div
         ref={ref}
@@ -337,15 +337,9 @@ function PartnershipCard() {
 
 /* ---------- Section ---------- */
 
-export default function WhyUs() {
+export default function WhyUs({ children }: { children?: React.ReactNode }) {
   return (
     <section id="why-us" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <style>{`
-        @keyframes whyus-glow { 0%,100% { opacity:.35; transform:translate(-50%,-50%) scale(.9);} 50% { opacity:.8; transform:translate(-50%,-50%) scale(1.15);} }
-        @keyframes whyus-float { 0%,100% { transform:translateY(0);} 50% { transform:translateY(-6px);} }
-        @keyframes whyus-kenburns { from { transform:scale(1);} to { transform:scale(1.12);} }
-        @media (prefers-reduced-motion: reduce) { .whyus-motion { animation: none !important; } }
-      `}</style>
 
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
@@ -372,20 +366,8 @@ export default function WhyUs() {
         <QualityCard />
         <ApproachCard />
 
-        {/* Box 3: One Integrated Stack */}
-        <div data-blue-section className="lg:col-span-5 bg-primary rounded-[16px] p-8 flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden h-full min-h-[320px]">
-          <h3 className="text-2xl font-medium text-white mb-auto mt-4">One Integrated Stack</h3>
-          <div className="mt-8 relative w-full flex flex-col items-center">
-            <div className="whyus-motion absolute top-1/2 left-1/2 w-3/4 h-12 bg-white/40 blur-2xl animate-[whyus-glow_3s_ease-in-out_infinite]" />
-            <div className="whyus-motion relative bg-white text-primary px-6 py-3 rounded-xl text-sm font-bold shadow-xl border border-white/50 w-full max-w-[280px] animate-[whyus-float_4s_ease-in-out_infinite]">
-              Design, Development, and AI in one unified workflow.
-            </div>
-            <p className="text-white/80 text-xs mt-4">Built for meaningful conversations.</p>
-          </div>
-        </div>
-
-        {/* Box 4: Business-Focused UX */}
-        <div className="lg:col-span-7 bg-surface rounded-[16px] border border-gray-100 p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
+        {/* Business-Focused UX */}
+        <div className="lg:col-span-7 bg-surface rounded-[16px] border border-gray-100 p-6 sm:p-8 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
           <h3 className="text-xl font-bold text-gray-900 mb-2">Business-Focused UX</h3>
           <p className="text-sm text-gray-500 mb-12">Clear flows built to drive conversion and growth.</p>
           <div className="flex flex-row justify-center items-end gap-4 md:gap-12 w-full">
@@ -395,19 +377,11 @@ export default function WhyUs() {
           </div>
         </div>
 
-        {/* Box 5: Built for Modern Standards */}
-        <div className="lg:col-span-4 bg-surface rounded-[16px] border border-gray-100 p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow h-full min-h-[320px]">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">Built for<br />Modern Standards</h3>
-          <p className="text-sm text-gray-500 mb-8">Optimized for speed, scalability, and trust.</p>
-          <div className="mt-auto w-full h-32 bg-gray-200 rounded-xl overflow-hidden relative">
-            <div className="whyus-motion relative w-full h-full animate-[whyus-kenburns_14s_ease-in-out_infinite_alternate]">
-              <Image src={whyUsData.imageOne} alt="Switch and Mixer Setup" fill sizes="(min-width: 1024px) 25vw, 100vw" className="object-cover" />
-            </div>
-          </div>
-        </div>
-
         <PartnershipCard />
       </div>
+
+      {/* Kartu statistik (Experience, Products, Clients, Team) */}
+      {children && <div className="mt-6">{children}</div>}
     </section>
   );
 }

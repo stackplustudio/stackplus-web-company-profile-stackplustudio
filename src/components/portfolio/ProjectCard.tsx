@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import type { Portfolio } from "@/generated/prisma/client";
 import { portfolioCategoryLabel } from "@/lib/categories";
 import { cn } from "@/lib/utils";
+import ProjectImage from "./ProjectImage";
 
 type Props = { project: Portfolio; featured?: boolean; priority?: boolean };
 
@@ -12,14 +12,7 @@ const MAX_TAGS = 4;
 function Thumb({ project, priority, sizes }: { project: Portfolio; priority?: boolean; sizes: string }) {
   const src = project.images[0];
   return src ? (
-    <Image
-      src={src}
-      alt={`${project.title} preview`}
-      fill
-      sizes={sizes}
-      priority={priority}
-      className="object-cover transition-transform duration-700 group-hover:scale-105"
-    />
+    <ProjectImage src={src} alt={`${project.title} preview`} sizes={sizes} priority={priority} />
   ) : (
     <div className="flex h-full w-full items-center justify-center text-sm text-ink/40">No image</div>
   );

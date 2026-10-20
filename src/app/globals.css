@@ -16,8 +16,7 @@ html {
   scroll-behavior: smooth;
 }
 
-
-
+/* Animasi muncul saat di-scroll (dipakai komponen Reveal) */
 .reveal {
   opacity: 0;
   transform: translateY(24px);

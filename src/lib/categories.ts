@@ -30,3 +30,19 @@ export const serviceTypeLabel = (value: string) =>
   SERVICE_TYPES.find((s) => s.value === value)?.label ?? value;
 
 export const MAX_PORTFOLIO_IMAGES = 4;
+
+export const STAT_ICONS = [
+  { value: "calendar", label: "Calendar" },
+  { value: "rocket", label: "Rocket" },
+  { value: "handshake", label: "Handshake" },
+  { value: "users", label: "People" },
+  { value: "star", label: "Star" },
+  { value: "award", label: "Award" },
+  { value: "globe", label: "Globe" },
+  { value: "code", label: "Code" },
+] as const;
+
+export const STAT_SOURCES = [
+  { value: "MANUAL", label: "Manual number" },
+  { value: "YEARS_SINCE_FOUNDING", label: "Auto: years since January 2026" },
+] as const;

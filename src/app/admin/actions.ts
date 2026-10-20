@@ -4,14 +4,14 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { Prisma } from "@/generated/prisma/client";
-import type { PortfolioCategory, ServiceType } from "@/generated/prisma/enums";
+import type { PortfolioCategory, ServiceType, StatSource } from "@/generated/prisma/enums";
 import { db } from "@/lib/db";
 import {
   checkLoginRateLimit, clearFailedLogins, clearSessionCookie, recordFailedLogin,
   requireAdmin, setSessionCookie, verifyAdminCredentials,
 } from "@/lib/auth";
 import { deleteBlobs } from "@/lib/blob";
-import { portfolioSchema, serviceSchema, type PortfolioInput, type ServiceInput } from "@/lib/validation";
+import { portfolioSchema, serviceSchema, statSchema, type PortfolioInput, type ServiceInput, type StatInput } from "@/lib/validation";
 
 export type ActionResult = { ok: true } | { ok: false; error: string; fieldErrors?: Record<string, string[]> };
 
@@ -128,4 +128,36 @@ export async function deleteService(id: string): Promise<ActionResult> {
   await requireAdmin();
   try { await db.servicePricing.delete({ where: { id } }); return { ok: true }; }
   catch (error) { console.error("deleteService failed:", error); return { ok: false, error: "Could not delete the package." }; }
+}
+
+// ---------- STAT CARDS (Why Us) ----------
+export async function saveStat(id: string | null, input: StatInput): Promise<ActionResult> {
+  await requireAdmin();
+  const parsed = statSchema.safeParse(input);
+  if (!parsed.success) {
+    return { ok: false, error: "Please fix the highlighted fields.",
+      fieldErrors: parsed.error.flatten().fieldErrors as Record<string, string[]> };
+  }
+  const data = { ...parsed.data, source: parsed.data.source as StatSource };
+  try {
+    if (id) await db.siteStat.update({ where: { id }, data });
+    else await db.siteStat.create({ data });
+  } catch (error) {
+    console.error("saveStat failed:", error);
+    return { ok: false, error: "Could not save the card. Please try again." };
+  }
+  revalidatePath("/");
+  return { ok: true };
+}
+
+export async function deleteStat(id: string): Promise<ActionResult> {
+  await requireAdmin();
+  try {
+    await db.siteStat.delete({ where: { id } });
+    revalidatePath("/");
+    return { ok: true };
+  } catch (error) {
+    console.error("deleteStat failed:", error);
+    return { ok: false, error: "Could not delete the card." };
+  }
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import ProjectImage from "@/components/portfolio/ProjectImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, ChevronRight, ExternalLink, MessageCircle } from "lucide-react";
@@ -91,7 +91,7 @@ export default async function ProjectPage({ params }: Props) {
 
           {hero && (
             <div className="relative mb-10 aspect-[16/9] overflow-hidden rounded-[16px] border border-line bg-surface-alt">
-              <Image src={hero} alt={`${project.title} main preview`} fill priority sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
+              <ProjectImage src={hero} alt={`${project.title} main preview`} priority sizes="(min-width: 1024px) 1024px, 100vw" />
             </div>
           )}
 
@@ -134,7 +134,7 @@ export default async function ProjectPage({ params }: Props) {
               <div className="grid gap-4 sm:grid-cols-2">
                 {gallery.map((src, i) => (
                   <div key={src} className="relative aspect-[16/10] overflow-hidden rounded-[16px] border border-line bg-surface-alt">
-                    <Image src={src} alt={`${project.title} screenshot ${i + 2}`} fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />
+                    <ProjectImage src={src} alt={`${project.title} screenshot ${i + 2}`} sizes="(min-width: 640px) 50vw, 100vw" />
                   </div>
                 ))}
               </div>

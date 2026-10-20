@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MAX_PORTFOLIO_IMAGES, PORTFOLIO_CATEGORIES, SERVICE_TYPES } from "@/lib/categories";
+import { MAX_PORTFOLIO_IMAGES, PORTFOLIO_CATEGORIES, SERVICE_TYPES, STAT_ICONS, STAT_SOURCES } from "@/lib/categories";
 import { isBlobUrl } from "@/lib/blob";
 
 const text = (max: number) => z.string().trim().max(max);
@@ -46,3 +46,15 @@ export const serviceSchema = z.object({
   { message: "Category does not belong to this service type.", path: ["category"] },
 );
 export type ServiceInput = z.input<typeof serviceSchema>;
+
+export const statSchema = z.object({
+  label: text(40).min(1, "Label is required."),
+  unit: text(40),
+  icon: z.enum(STAT_ICONS.map((i) => i.value) as [string, ...string[]]),
+  source: z.enum(STAT_SOURCES.map((s) => s.value) as [string, ...string[]]),
+  value: z.number().int().min(0).max(1_000_000),
+  suffix: text(4),
+  sortOrder: z.number().int().min(0).max(9999),
+  published: z.boolean(),
+});
+export type StatInput = z.input<typeof statSchema>;

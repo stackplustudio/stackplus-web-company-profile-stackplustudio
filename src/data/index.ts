@@ -451,9 +451,3 @@ export const whyUsData = {
   // ... data lainnya seperti title atau desc jika ada
 };
 
-export const statsData = [
-  { key: "experience", label: "Experience", value: 1, suffix: "+", unit: "Years" },
-  { key: "products", label: "Products", value: 11, suffix: "", unit: "Delivered" },
-  { key: "clients", label: "Clients", value: 7, suffix: "", unit: "Happy clients" },
-  { key: "team", label: "Team", value: 6, suffix: "", unit: "Members" },
-] as const;

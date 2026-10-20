@@ -11,27 +11,29 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // Satu-satunya font situs: Plus Jakarta Sans (variabel --font-sans diset di layout.tsx)
       fontFamily: {
         sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
       },
-      // Design tokens StackPlus. Biru #0053F1 tetap menjadi warna utama brand.
       colors: {
         primary: {
-          DEFAULT: "#0053F1", // Biru elektrik StackPlus
-          dark: "#003CB3", // Hover dan fokus tombol utama
+          DEFAULT: "#0053F1",
+          dark: "#003CB3",
         },
         secondary: "#FCFBF6",
-        background: "#FCFBF6", // Latar situs
-        surface: "#FDFBF7", // Latar kartu
-        "surface-alt": "#F6F3EC", // Latar section selang-seling
-        line: "#EAE5D9", // Border kartu dan pemisah
+        background: "#FCFBF6",
+        surface: "#FDFBF7",
+        "surface-alt": "#F6F3EC",
+        line: "#EAE5D9",
         ink: {
-          DEFAULT: "#423E3A", // Teks utama dan tombol sekunder
-          dark: "#2A2724", // Hover tombol sekunder
+          DEFAULT: "#423E3A",
+          dark: "#2A2724",
         },
       },
       keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
         "marquee-x": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
@@ -46,6 +48,7 @@ const config: Config = {
         },
       },
       animation: {
+        marquee: "marquee 20s linear infinite",
         "marquee-x": "marquee-x 40s linear infinite",
         "marquee-x-reverse": "marquee-x-reverse 40s linear infinite",
         float: "float 6s ease-in-out infinite",
@@ -53,19 +56,8 @@ const config: Config = {
     },
   },
   plugins: [
-    // Menyediakan kelas animate-in, fade-in, slide-in-from-*, zoom-in yang dipakai di banyak komponen
     animate,
-    // Utility yang sebelumnya dipakai tetapi belum pernah didefinisikan
     plugin(({ addUtilities, addComponents }) => {
-      addUtilities({
-        ".hide-scrollbar": {
-          "-ms-overflow-style": "none",
-          "scrollbar-width": "none",
-        },
-        ".hide-scrollbar::-webkit-scrollbar": {
-          display: "none",
-        },
-      });
       addComponents({
         ".card-hover": {
           transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
@@ -74,6 +66,15 @@ const config: Config = {
             boxShadow: "0 16px 32px -12px rgb(0 83 241 / 0.2)",
             borderColor: "rgb(0 83 241 / 0.3)",
           },
+        },
+      });
+      addUtilities({
+        ".hide-scrollbar": {
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+        },
+        ".hide-scrollbar::-webkit-scrollbar": {
+          display: "none",
         },
       });
     }),

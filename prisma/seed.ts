@@ -58,6 +58,19 @@ async function seedServices() {
   console.log(`✓ ${data.length} paket layanan di-seed.`);
 }
 
-(async () => { await seedAdmin(); await seedServices(); })()
+async function seedStats() {
+  if ((await db.siteStat.count()) > 0) return console.log("• site_stats sudah berisi, lewati.");
+  await db.siteStat.createMany({
+    data: [
+      { label: "Experience", unit: "Years", icon: "calendar", source: "YEARS_SINCE_FOUNDING", value: 0, suffix: "+", sortOrder: 0 },
+      { label: "Products", unit: "Delivered", icon: "rocket", source: "MANUAL", value: 11, suffix: "", sortOrder: 1 },
+      { label: "Clients", unit: "Happy clients", icon: "handshake", source: "MANUAL", value: 7, suffix: "", sortOrder: 2 },
+      { label: "Team", unit: "Members", icon: "users", source: "MANUAL", value: 6, suffix: "", sortOrder: 3 },
+    ],
+  });
+  console.log("✓ 4 kartu statistik di-seed.");
+}
+
+(async () => { await seedAdmin(); await seedServices(); await seedStats(); })()
   .catch((e) => { console.error(e); process.exit(1); })
   .finally(() => db.$disconnect());

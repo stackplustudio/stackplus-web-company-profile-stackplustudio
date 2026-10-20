@@ -26,3 +26,7 @@ export const getServicePlans = (serviceType: ServiceType, category?: string) =>
     where: { serviceType, ...(category ? { category } : {}) },
     orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
   }), []);
+
+  // null = database tidak terjangkau (tampilkan data cadangan); [] = memang kosong (sembunyikan).
+export const getSiteStats = () =>
+  safe(() => db.siteStat.findMany({ where: publicWhere, orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }] }), null);

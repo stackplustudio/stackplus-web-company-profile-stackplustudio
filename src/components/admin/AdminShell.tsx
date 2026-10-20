@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink, FolderKanban, LayoutDashboard, LogOut, Menu, Tags, X } from "lucide-react";
+import { BarChart3, ExternalLink, FolderKanban, LayoutDashboard, LogOut, Menu, Tags, X } from "lucide-react";
 import { logoutAction } from "@/app/admin/actions";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +11,7 @@ const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/portfolios", label: "Portfolio", icon: FolderKanban, exact: false },
   { href: "/admin/services", label: "Services & Pricing", icon: Tags, exact: false },
+  { href: "/admin/analytics", label: "Analytics", icon: BarChart3, exact: false },
 ] as const;
 
 export default function AdminShell({ email, children }: { email: string; children: React.ReactNode }) {

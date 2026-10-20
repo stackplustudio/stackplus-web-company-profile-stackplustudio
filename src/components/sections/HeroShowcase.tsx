@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ProjectImage from "@/components/portfolio/ProjectImage";
 
 export type ShowcaseProject = {
   id: string;
@@ -50,29 +50,22 @@ function ShowcaseCard({ projects, start, offsetMs, className, floatClass }: {
           aria-label={`View ${project.title} case study`}
           className="group relative block aspect-[16/10] overflow-hidden rounded-[22px] bg-primary shadow-2xl shadow-primary/30 ring-1 ring-white/30"
         >
-          {/* Isi kartu: berganti dengan fade */}
+          {/* Isi kartu: berganti dengan fade. Gambar tampil utuh, teks di bar biru bawah. */}
           <div key={project.id} className="absolute inset-0 animate-in fade-in duration-700">
-            {project.image && (
-              <Image
-                src={project.image}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 360px, 70vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary/60 to-primary/10" />
-            <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
-              <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider">
-                <span className="rounded-full bg-white/20 px-2.5 py-1 backdrop-blur-sm">{project.category}</span>
-                <span className="text-white/70">{project.year}</span>
+            <div className="absolute inset-x-0 top-0 bottom-[54px] sm:bottom-[64px]">
+              {project.image && <ProjectImage src={project.image} alt="" sizes="(min-width: 1024px) 360px, 80vw" />}
+            </div>
+            <div className="absolute inset-x-0 bottom-0 flex h-[54px] items-center justify-between gap-3 bg-gradient-to-r from-primary to-primary-dark px-3.5 text-white sm:h-[64px] sm:px-5">
+              <div className="min-w-0">
+                <p className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-wider text-white/80 sm:text-[10px]">
+                  <span className="truncate">{project.category}</span>
+                  <span>{project.year}</span>
+                </p>
+                <h3 className="truncate text-sm font-bold sm:text-lg">{project.title}</h3>
               </div>
-              <div className="flex items-end justify-between gap-3">
-                <h3 className="truncate text-base font-bold sm:text-xl">{project.title}</h3>
-                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-                  <ArrowUpRight size={16} aria-hidden />
-                </span>
-              </div>
+              <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-white text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:h-8 sm:w-8">
+                <ArrowUpRight size={15} aria-hidden />
+              </span>
             </div>
           </div>
         </Link>
@@ -94,14 +87,14 @@ export default function HeroShowcase({ projects }: { projects: ShowcaseProject[]
         projects={projects}
         start={0}
         offsetMs={0}
-        className="right-0 top-[2%] z-10 w-[68%] sm:w-[62%]"
+        className="right-0 top-[2%] z-10 w-[78%] sm:w-[62%]"
         floatClass="animate-float"
       />
       <ShowcaseCard
         projects={projects}
         start={projects.length > 1 ? 1 : 0}
         offsetMs={2500}
-        className="bottom-[2%] left-0 z-20 w-[68%] sm:w-[62%]"
+        className="bottom-[2%] left-0 z-20 w-[78%] sm:w-[62%]"
         floatClass="animate-float [animation-delay:-3s] [animation-direction:reverse]"
       />
     </div>
